@@ -1,0 +1,62 @@
+﻿.ui-datepicker {
+    border: 1px solid #cdd9e5;
+    background: #ffffff;
+    padding: 0px;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    position: relative;
+    padding: .2em 0;
+    border-bottom: 1px solid #cdd9e5;
+    border-top: none;
+    border-left: none;
+    border-right: none; 
+    background: #003f7a;
+}
+
+.ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-hover,
+.ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-hover {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    top: 2px;
+}
+
+.ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-hover {
+    left: 2px;
+}
+
+.ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-hover {
+    right: 2px;
+}
+
+.ui-datepicker .ui-datepicker-header .ui-datepicker-prev .ui-icon {
+    background-image: url(../images/datepicker_prev.png);
+    background-position: 0px 0px;
+}
+
+.ui-datepicker .ui-datepicker-header .ui-datepicker-next .ui-icon {
+     background-image: url(../images/datepicker_next.png);
+    background-position: 0px 0px;
+}
+
+.ui-datepicker table.ui-datepicker-calendar {
+    width: 95%;
+    margin: 0 .5em .4em;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-default{
+    background: #e4edf1;
+    border: 1px solid #cdd9e5;
+    color: #003f7a;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-active,
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-hover,
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-highlight {
+    background: #ffffff;
+}
+
+.ui-datepicker table.ui-datepicker-calendar td a.ui-state-highlight {
+    border: 1px solid #fcefa1
+}

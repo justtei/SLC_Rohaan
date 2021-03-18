@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="221c6dc7-40c1-4f77-b249-d0bae3c6a022" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:57905/UmsService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UmsService.disco" MetadataType="Disco" ID="e9be48d4-f5d3-4397-a044-7f9fbcfa926a" SourceId="1" SourceUrl="http://localhost:57905/UmsService.svc?disco" />
+    <MetadataFile FileName="UmsService.wsdl" MetadataType="Wsdl" ID="8e7ff512-1a8e-4464-a740-4cb5cfeeae17" SourceId="1" SourceUrl="http://localhost:57905/UmsService.svc?wsdl" />
+    <MetadataFile FileName="UmsService.xsd" MetadataType="Schema" ID="caf6cebc-22b9-408d-a835-f607dba4c53a" SourceId="1" SourceUrl="http://localhost:57905/UmsService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UmsService1.xsd" MetadataType="Schema" ID="9834854b-3dd2-4f42-a19e-59d49369f8f0" SourceId="1" SourceUrl="http://localhost:57905/UmsService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UmsService2.xsd" MetadataType="Schema" ID="63ce81c6-5ac7-4df7-b479-366282246ce5" SourceId="1" SourceUrl="http://localhost:57905/UmsService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UmsService3.xsd" MetadataType="Schema" ID="8eaacd9d-bca2-427d-886a-4e224cc9e1b6" SourceId="1" SourceUrl="http://localhost:57905/UmsService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

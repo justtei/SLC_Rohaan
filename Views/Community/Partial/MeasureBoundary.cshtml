@@ -1,0 +1,13 @@
+﻿@using MSLivingChoices.Localization
+@model string
+<!-- ko with: @Model -->
+<input type="text" class="fixed-width" placeholder="@StaticContent.WtrMrk_Min"
+     data-bind="textInput: min, event: { keypress: function(data, event) { return onPriceKeypress(min(), event); } }, validationElement: min"/>
+<span class="dash">-</span>
+<input type="text" class="fixed-width" placeholder="@StaticContent.WtrMrk_Max"
+     data-bind="textInput: max, event: { keypress: function(data, event) { return onPriceKeypress(max(), event); } }, validationElement: max"/>
+<select class="fixed-width" data-bind="options: availableMeasures, value: measure, optionsText: 'text', optionsValue: 'value'">
+</select>
+<span class="field-validation-error" data-bind="validationMessage: min"></span>
+<span class="field-validation-error" data-bind="validationMessage: max"></span>
+<!-- /ko -->

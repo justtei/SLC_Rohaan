@@ -1,0 +1,191 @@
+﻿html{}
+
+@import '../mixins.less';
+
+//#region Mixin
+
+.container-fixed() {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left:  (@grid-gutter-width / 2);
+  padding-right: (@grid-gutter-width / 2);
+}
+
+.make-grid-columns() {
+  // Common styles for all sizes of grid columns, widths 1-12
+  .col(@index) when (@index = 1) { // initial
+    @item: ~'.col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}, .col-any-@{index}';
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index =< @grid-columns) { // general; '=<' isn't a typo
+    @item: ~'.col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}, .col-any-@{index}';
+    .col((@index + 1), ~'@{list}, @{item}');
+  }
+  .col(@index, @list) when (@index > @grid-columns) { // terminal
+    @{list} {
+      position: relative;
+      // Prevent columns from collapsing when empty
+      min-height: 1px;
+      // Inner gutter via padding
+      padding-left:  (@grid-gutter-width / 2);
+      padding-right: (@grid-gutter-width / 2);
+    }
+  }
+  .col(1); // kickstart it
+}
+
+.float-grid-columns(@class) {
+  .col(@index) when (@index = 1) { // initial
+    @item: ~'.col-@{class}-@{index}';
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index < @grid-columns) { // general
+    @item: ~'.col-@{class}-@{index}';
+    .col((@index + 1), ~'@{list}, @{item}');
+  }
+  .col(@index, @list) when (@index = @grid-columns) { // terminal
+    @{list} {
+      float: left;
+    }
+  }
+  .col(1); // kickstart it
+}
+
+
+.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+  .col-@{class}-@{index} {
+    width: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = push) {
+  .col-@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) {
+  .col-@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = offset) {
+  .col-@{class}-offset-@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+}
+
+.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
+  .calc-grid-column(@index, @class, @type);
+  // next iteration
+  .loop-grid-columns((@index - 1), @class, @type);
+}
+
+.make-grid(@class) {
+  .float-grid-columns(@class);
+  .loop-grid-columns(@grid-columns, @class, width);
+  .loop-grid-columns(@grid-columns, @class, pull);
+  .loop-grid-columns(@grid-columns, @class, push);
+  .loop-grid-columns(@grid-columns, @class, offset);
+}
+
+//#endregion
+
+.container {
+    .clearfix();
+    .container-fixed();
+    max-width: @container-max-width;
+
+    &.bordered {
+        border: @container-border-width solid @light-gray;
+    }
+
+    &.no-border {
+        .transition(border-color @transition-duration ease-out);
+        border-color: @bg-color;
+    }
+}
+
+.row {
+      margin-left:  (@grid-gutter-width / -2);
+      margin-right: (@grid-gutter-width / -2);
+      position: relative;
+      .clearfix();
+}
+
+.make-grid-columns();
+
+//Uncoment whis section for generating responsive classes
+/*@media (max-width: @screen-sm-max){
+    .make-grid(xs);
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max){
+  .make-grid(sm);
+}
+
+@media (min-width: @screen-md-min) {
+  .make-grid(md);
+}
+
+@media (min-width: @screen-lg-min) {
+  .make-grid(lg);
+}*/
+
+.make-grid(any);
+
+.row-wrap {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.grid-row {
+    .row();
+
+    > [class*='col'] {
+        float: none;
+        display: inline-block;
+        vertical-align: middle;
+
+        + [class*='col-'] {
+            padding-left: 0;
+            //this margin remove space between inline-block elements
+            margin-left: -5px;
+        }
+    }
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.relative {
+    position: relative;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.equal-height {
+     overflow: hidden;
+
+     > div[class*=col-] {
+         margin-bottom: -9999px;
+         padding-bottom: 9999px;
+     }
+ }
+
+.clearfix{
+    .clearfix();
+}
+
+.centred {
+    display: table-cell;
+    width: 9999px;
+    max-width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}

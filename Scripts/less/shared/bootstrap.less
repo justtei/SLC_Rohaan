@@ -1,0 +1,386 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+//#region Tabs
+
+.nav-tabs {
+    .list-unstyled();
+    .clearfix();
+
+    &.tabs-inline > li {
+        float: left;
+
+        > a {
+            margin-right: 2px;
+            border: none;
+            line-height: @line-height-base;
+        }
+    }
+
+    &.tabs-condensed > li > a {
+        padding: 5px 10px;
+    }
+
+    &.tabs-brand > li {
+        > a {
+            color: @black;
+            .prop-transition(background-color);
+
+            &:hover {
+                color: @white;
+                background-color: @brand-color-red;
+            }
+        }
+
+        &.active > a {
+            .prop-transition(color, background-color);
+
+            &,
+            &:hover,
+            &:focus {
+                color: @white;
+                background-color: @brand-color-red;
+            }
+        }
+    }
+
+    > li {
+        display: block;
+
+        > a {
+            display: block;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+        }
+
+        &.active > a {
+            cursor: default;
+        }
+    }
+}
+
+.tab-content {
+    > .tab-pane {
+        display: none;
+    }
+
+    > .active {
+        display: block;
+    }
+}
+
+//#endregion
+
+//#region Animate
+
+.fade {
+    opacity: 0;
+    .transition(opacity .15s linear);
+
+    &.in {
+        opacity: 1;
+    }
+}
+
+.collapse {
+    display: none;
+    visibility: hidden;
+
+    &.in {
+        display: block;
+        visibility: visible;
+    }
+
+    tr&.in {
+        display: table-row;
+    }
+
+    tbody&.in {
+        display: table-row-group;
+    }
+}
+
+.collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    .transition-property(~"height, visibility");
+    .transition-duration(.35s);
+    .transition-timing-function(ease);
+}
+
+
+//#endregion
+
+//#region Modal
+// .modal-open      - body class for killing the scroll
+// .modal           - container to scroll within
+// .modal-dialog    - positioning shell for the actual modal
+// .modal-content   - actual modal w/ bg and corners and shit
+
+
+// Kill the scroll on the body
+.modal-open {
+    overflow: hidden;
+}
+
+// Container that the modal scrolls within
+.modal {
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: @zindex-modal;
+    -webkit-overflow-scrolling: touch;
+    // Prevent Chrome on Windows from adding a focus outline. For details, see
+    // https://github.com/twbs/bootstrap/pull/10951.
+    outline: 0;
+    // When fading in the modal, animate it to slide down
+    &.fade .modal-dialog {
+        .translate(0, -25%);
+        .transition-transform(~"0.3s ease-out");
+    }
+
+    &.in .modal-dialog {
+        .translate(0, 0);
+    }
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+// Shell div to position the modal with bottom padding
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+
+// Actual modal
+.modal-content {
+    position: relative;
+    background-color: @bg-color;
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    background-clip: padding-box;
+    outline: none;
+}
+
+// Modal background
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: @black;
+    // Fade for backdrop
+    &.fade {
+        opacity: 0;
+    }
+
+    &.in {
+        opacity: @modal-backdrop-opacity;
+    }
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll;
+}
+
+// Scale up the modal
+@media (min-width: @screen-sm-min) {
+    // Automatically set modal's width for larger viewports
+    .modal-dialog {
+        width: @modal-md;
+        margin: 30px auto;
+    }
+
+    .modal-content {
+        box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    }
+
+    // Modal sizes
+    .modal-sm {
+        width: @modal-sm;
+    }
+}
+
+@media (min-width: @screen-md-min) {
+    .modal-lg {
+        width: @modal-lg;
+    }
+}
+
+//#endregion
+
+//#region Popover
+
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: @zindex-popover;
+    display: none;
+    max-width: @popover-max-width;
+    padding: 1px;
+    text-align: left; // Reset given new insertion method
+    background-color: @popover-bg;
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: @popover-border-width solid @popover-fallback-border-color;
+    border: @popover-border-width solid @popover-border-color;
+    .box-shadow(0 5px 10px rgba(0,0,0,.2));
+    // Overrides for proper insertion
+    white-space: normal;
+
+    .close {
+        position:absolute;
+        right: 5px;
+        top: 5px;
+        font-size: @popover-close-icon-font-size;
+        font-weight: normal;
+        line-height: 1;
+        letter-spacing: normal;
+    }
+
+    // Offset the popover to account for the popover arrow
+    &.top {
+        margin-top: -@popover-arrow-width;
+
+        > .arrow {
+            left: 50%;
+            margin-left: -@popover-arrow-outer-width;
+            border-bottom-width: 0;
+            border-top-color: @popover-arrow-outer-fallback-color; // IE8 fallback
+            border-top-color: @popover-arrow-outer-color;
+            bottom: -@popover-arrow-outer-width;
+
+            &:after {
+                content: ' ';
+                bottom: 1px;
+                margin-left: -@popover-arrow-width;
+                border-bottom-width: 0;
+                border-top-color: @popover-arrow-color;
+            }
+        }
+    }
+
+    &.right {
+        margin-left: @popover-arrow-width;
+        width:100%;
+
+        > .arrow {
+            top: 50%;
+            left: -@popover-arrow-outer-width;
+            margin-top: -@popover-arrow-outer-width;
+            border-left-width: 0;
+            border-right-color: @popover-arrow-outer-fallback-color; // IE8 fallback
+            border-right-color: @popover-arrow-outer-color;
+
+            &:after {
+                content: ' ';
+                left: 1px;
+                bottom: -@popover-arrow-width;
+                border-left-width: 0;
+                border-right-color: @popover-arrow-color;
+            }
+        }
+    }
+
+    &.bottom {
+        margin-top: @popover-arrow-width;
+
+        > .arrow {
+            left: 50%;
+            margin-left: -@popover-arrow-outer-width;
+            border-top-width: 0;
+            border-bottom-color: @popover-arrow-outer-fallback-color; // IE8 fallback
+            border-bottom-color: @popover-arrow-outer-color;
+            top: -@popover-arrow-outer-width;
+
+            &:after {
+                content: ' ';
+                top: 1px;
+                margin-left: -@popover-arrow-width;
+                border-top-width: 0;
+                border-bottom-color: @popover-arrow-color;
+            }
+        }
+    }
+
+    &.left {
+        margin-left: -@popover-arrow-width;
+
+        > .arrow {
+            top: 50%;
+            right: -@popover-arrow-outer-width;
+            margin-top: -@popover-arrow-outer-width;
+            border-right-width: 0;
+            border-left-color: @popover-arrow-outer-fallback-color; // IE8 fallback
+            border-left-color: @popover-arrow-outer-color;
+
+            &:after {
+                content: ' ';
+                right: 1px;
+                border-right-width: 0;
+                border-left-color: @popover-arrow-color;
+                bottom: -@popover-arrow-width;
+            }
+        }
+    }
+
+    > .arrow {
+        border-width: @popover-arrow-outer-width;
+
+        &,
+        &:after {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+        }
+
+            &:after {
+                border-width: @popover-arrow-width;
+                content: ' ';
+            }
+    }
+}
+
+.popover-title {
+    margin: 0;
+    padding: 8px 14px;
+    font-size: @font-size-base;
+    font-weight: normal;
+    line-height: 18px;
+    background-color: @popover-title-bg;
+    border-bottom: 1px solid darken(@popover-title-bg, 5%);
+    border-radius: 5px 5px 0 0;
+}
+
+.popover-content {
+    padding: 9px 14px;
+}
+
+
+//#endregion

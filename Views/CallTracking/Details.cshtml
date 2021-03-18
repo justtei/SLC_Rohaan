@@ -1,0 +1,69 @@
+﻿@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.CommunityCallTrackingPhonesVm
+@{
+    ViewBag.Title = "Community Call Tracking Phones";
+}
+@section scripts
+{
+    <script type="text/javascript">
+        mslc.resolve(['lib/jQuery', 'admin/editors/callTrackingPhonesEditor'], function($, callTrackingPhonesEditor) {
+            $(function() {
+                callTrackingPhonesEditor.init(@Html.Json(Model));
+            });
+        });
+    </script>
+}
+@section css
+{
+    @Url.Css("themes/base/jquery.ui.core.css")
+    @Url.Css("themes/base/jquery.ui.theme.css")
+    @Url.Css("themes/base/jquery.ui.datepicker.css")
+}
+<div class="form-title">
+    @string.Format("{0} {1}", StaticContent.Ttl_CallTrackingFor, @Model.CommunityName)
+</div>
+<hr />
+<span class="field-validation-error" data-bind="text: callTrackingWarning"></span>
+<div data-bind="css: { disable: !isPublished }">
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: provisionCallTrackingNumbers">
+        <span>@DisplayNames.ProvisionCallTrackingNumbers</span>
+    </label>
+    <div id="callTrackingPhones" data-bind="slideVisible: provisionCallTrackingNumbers()">
+        <span class="btn btn-small btn-info" data-bind="click: addPhone">
+            @StaticContent.WtrMark_AddCallTrackingPhone
+        </span>
+        <!-- ko foreach: callTrackingPhones -->
+        <div class="call-tracking-phone">
+            @{ Html.RenderPartial("Partial/CallTrackingPhone"); }
+            <!-- ko if: !provisionPhone() -->
+            <span class="btn btn-mini btn-danger delete-call-tracking-phone" data-bind="click: $parent.deletePhone">
+                @StaticContent.Btn_Delete
+            </span>
+            <!-- /ko -->
+            <div class="call-tracking-resume-area"
+                data-bind="if: provisionPhone()">
+                <span class="btn btn-mini btn-warning "
+                    data-bind="visible: !isDisconnected(), click: $parent.disconnectPhone">
+                    @StaticContent.Btn_Disconnect
+                </span>
+                <span class="btn btn-mini btn-success"
+                    data-bind="visible: isDisconnected(), click: $parent.resumePhone">
+                    @StaticContent.Btn_Resume
+                </span>
+                <div class="expires-info" data-bind="visible: isDisconnected(), text: resumeInfo"></div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<div class="submit-area">
+    <input type="button" class="btn btn-primary" value="@StaticContent.Btn_SaveAndSubmit" data-bind="click: submit"/>
+</div>
+<div class="alert alert-block alert-error" data-bind="visible: !isValid()">
+    <ul data-bind="foreach: errors">
+        <li data-bind="text: $data"></li>
+    </ul>
+</div>

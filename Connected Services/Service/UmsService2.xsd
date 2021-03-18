@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:57905/UmsService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+  <xs:complexType name="ResponseResultOfArrayOfBrandTypeIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfBrandType" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q1:ArrayOfBrandType" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfBrandTypeIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfBrandTypeIM_P2MBHX" />
+  <xs:simpleType name="ResponseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Failed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ResponseStatus" nillable="true" type="tns:ResponseStatus" />
+  <xs:complexType name="ResponseResultOfArrayOfCityIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfCity" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q2:ArrayOfCity" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfCityIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfCityIM_P2MBHX" />
+  <xs:complexType name="ResponseResultOfArrayOfCountryIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfCountry" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q3:ArrayOfCountry" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfCountryIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfCountryIM_P2MBHX" />
+  <xs:complexType name="ResponseResultOfArrayOfEmailTypeIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfEmailType" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q4:ArrayOfEmailType" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfEmailTypeIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfEmailTypeIM_P2MBHX" />
+  <xs:complexType name="ResponseResultOfArrayOfPhoneTypeIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfPhoneType" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q5:ArrayOfPhoneType" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfPhoneTypeIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfPhoneTypeIM_P2MBHX" />
+  <xs:complexType name="ResponseResultOfArrayOfStateIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfState" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q6:ArrayOfState" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfStateIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfStateIM_P2MBHX" />
+  <xs:complexType name="ResponseResultOfArrayOfPublicationIM_P2MBHX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfPublication" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" minOccurs="0" name="Result" nillable="true" type="q7:ArrayOfPublication" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfArrayOfPublicationIM_P2MBHX" nillable="true" type="tns:ResponseResultOfArrayOfPublicationIM_P2MBHX" />
+  <xs:complexType name="ResponseResultOfboolean">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="boolean" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Status" type="tns:ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseResultOfboolean" nillable="true" type="tns:ResponseResultOfboolean" />
+</xs:schema>

@@ -1,0 +1,52 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+.modal-header {
+    .close {
+        font-size: @font-size-icon;
+        font-weight: normal;
+        padding: @vpadding;
+        float: right;
+        line-height: 1;
+        letter-spacing: normal;
+    }
+
+    .modal-title {
+        margin-right: @hpadding-l * 1.5;
+        padding-bottom: @vpadding;
+        padding-left: @hpadding-l;
+        padding-top: @vpadding;
+        line-height: 1;
+    }
+
+    border-bottom: solid @light-gray 1px;
+}
+
+.modal-body {
+    .clearfix();
+    position: relative;
+
+    .lead-form {
+        margin: @grid-gutter-width @grid-gutter-width 0 @grid-gutter-width;
+    }
+
+    .complex {
+        padding: 0 0 0 @grid-gutter-width;
+
+        .lead-form {
+            margin: 0;
+        }
+
+        h4 {
+            display: none;
+        }
+    }
+
+    .photo-tour-wrapper {
+        padding: @grid-gutter-width/2;
+        border-bottom: 3px solid #d8d8d8;
+        background-color: #ededed;
+    }
+}

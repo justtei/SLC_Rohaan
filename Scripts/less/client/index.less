@@ -1,0 +1,178 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+.background {
+    width: 100%;
+    .scaleX(-1);
+}
+
+.index {
+    position: relative;
+
+    .logo {
+        position: absolute;
+        left: 3%;
+        padding-top: @vpadding;
+        z-index: 2;
+    }
+
+    .search-bar {
+        position: absolute;
+        top: 66%;
+        width: 100%;
+
+        > .container {
+            background-color: rgba(darken(@brand-color-blue, 10%), 0.7);
+
+             button, input {
+                border: 1px solid white;
+            }
+        }
+    }
+
+    .type-list {
+        .list-unstyled();
+        text-transform: uppercase;
+        font-weight: bold;
+        color: @index-type-list-color;
+
+        > li {
+            cursor: pointer;
+
+            &.active,
+            &:hover {
+                color: @index-type-list-active-color;
+            }
+
+            &.active {
+                .arrow {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .btn-wrapper {
+        padding: 0;
+        margin-left: -@grid-gutter-width/2;
+    }
+
+    .arrow-wrapper {
+        display: inline-block;
+        position: relative;
+    }
+
+    .arrow {
+        display: none;
+        position: absolute;
+        bottom: -@indent;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 @index-search-arrow-width/2 @index-search-arrow-height @index-search-arrow-width/2;
+        border-color: transparent transparent @input-border-color transparent;
+        margin-left: -@index-search-arrow-width/2;
+
+        &.focus {
+            border-color: transparent transparent @input-border-active-color transparent;
+        }
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            top: @input-border-width;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 @index-search-arrow-width/2 @index-search-arrow-height @index-search-arrow-width/2;
+            border-color: transparent transparent @white transparent;
+            margin-left: -@index-search-arrow-width/2;
+            z-index: 2;
+        }
+    }
+}
+
+.index-order-wrapper {
+    background-color: @index-order-bg-color;
+    padding-bottom: @vpadding + @footer-height;
+}
+
+//#region Tab widget
+
+.index-description {
+    .clearfix();
+    .list-unstyled();
+
+    > li {
+        .clearfix();
+
+        +li {
+            border-top: 2px solid #dadada;
+            margin-top: @grid-gutter-width;
+            padding-top: @grid-gutter-width;
+        }
+    }
+
+    .icon-type {
+        float: left;
+        margin-left: -100%;
+    }
+
+    .description {
+        margin-left: @icon-type-size + @hpadding;
+        float: left;
+    }
+
+    ul.list-inline {
+        text-align: right;
+    }
+}
+
+.icon-type {
+    width: @icon-type-size;
+    height: @icon-type-size;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    .prop-transition(background-image);
+}
+
+.icon-shc {
+    background-image: url(../../images/type-icons/senior-housing-and-care.png);
+
+    li.active &,
+    li:hover & {
+        background-image: url(../../images/type-icons/senior-housing-and-care-active.png);
+    }
+}
+
+.icon-aac {
+    background-image: url(../../images/type-icons/active-adult-communities.png);
+
+    li.active &,
+    li:hover & {
+        background-image: url(../../images/type-icons/active-adult-communities-active.png);
+    }
+}
+
+.icon-aah {
+    background-image: url(../../images/type-icons/active-adult-homes.png);
+
+    li.active &,
+    li:hover & {
+        background-image: url(../../images/type-icons/active-adult-homes-active.png);
+    }
+}
+
+.icon-pc {
+    background-image: url(../../images/type-icons/products-and-services.png);
+
+    li.active &,
+    li:hover & {
+        background-image: url(../../images/type-icons/products-and-services-active.png);
+    }
+}
+
+//#endregion

@@ -1,0 +1,516 @@
+﻿@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Admin.ViewModels
+
+@if (SLC_Rohaan.Rohaanic.GetRoles.IsAdmin((int)Session["UserId"]))
+{
+    <input type="hidden" id="IsAdmin" value="true" />
+    <div class="field-label">
+        <label>@DisplayNames.CommunityName</label>
+        <span class="asterisk">*</span>
+    </div>
+    <div>
+        <input type="text" data-bind="textInput: name, validationElement: name" />
+        <span class="field-validation-error" data-bind="validationMessage: name"></span>
+    </div>
+    <div class="field-label">
+        <label>@DisplayNames.Book</label>
+        <span class="asterisk">*</span>
+    </div>
+    <div>
+        <select data-bind="options: books, value: bookId, optionsText: 'text', optionsValue: 'value',
+        validationElement: bookId, optionsCaption: '@StaticContent.WtrMrk_Select    '">
+        </select>
+    </div>
+    <div class="field-label">
+        <label>ATTACH USER</label>
+        <span class="asterisk">*</span>
+    </div>
+    <div>
+        <select id="AssignedTo">
+            @foreach(var show in ViewBag.VU as List<SLC_Rohaan.Models.ViewUsers>)
+            {
+                <option value="@show.idx">@show.FirstName @show.LastName</option>
+            }
+        </select>
+    </div>
+    <div class="field-label">
+        <label>@StaticContent.Lbl_Package</label>
+        <span class="asterisk">*</span>
+    </div>
+    <div>
+        <select data-bind="options: packages, value: package, optionsText: 'text', optionsValue: 'value',
+        validationElement: package, optionsCaption: '@StaticContent.WtrMrk_Select    '">
+        </select>
+    </div>
+    Html.RenderPartial("Partial/PhoneList");
+    <div>
+        <textarea data-bind="textInput: description"></textarea>
+    </div>
+    <div class="field-label">
+        <label>@DisplayNames.WebsiteAddress</label>
+    </div>
+    <div>
+        <input type="text" data-bind="textInput: websiteUrl, validationElement: websiteUrl" />
+        <span class="field-validation-error" data-bind="validationMessage: websiteUrl"></span>
+    </div>
+    <div>
+        <div class="inline-block">
+            <label>@DisplayNames.PublishStart</label>
+            <input type="text" data-bind="datepicker: publishStart, validationElement: publishStart" />
+        </div>
+        <div class="inline-block">
+            <label>@DisplayNames.PublishEnd</label>
+            <input type="text" data-bind="datepicker: publishEnd" />
+        </div>
+        <div>
+            <span class="field-validation-error" data-bind="validationMessage: publishStart"></span>
+        </div>
+    </div>
+}
+else
+{
+    if (SLC_Rohaan.Rohaanic.GetRoles.IsIList((int)Session["UserId"]) && Model != null)
+    {
+        <div>
+            <div class="field-label">
+                <label>@DisplayNames.SecondaryListingTypes</label>
+                <span class="asterisk">*</span>
+            </div>
+            <div class="checkbox-list" data-bind="foreach: listingTypes, validationElement: listingTypes">
+                <div>
+                    @{ Html.RenderPartial("Partial/CheckBox"); }
+                </div>
+            </div>
+            <div class="checkbox-list-error-message">
+                <span class="field-validation-error" data-bind="validationMessage: listingTypes"></span>
+            </div>
+        </div>
+        <div data-bind="slideVisible: listingTypes()[2].isChecked()">
+            <div class="field-label">
+                <label>@DisplayNames.SHCCategories</label>
+                <span class="asterisk">*</span>
+            </div>
+            <div class="checkbox-list" data-bind="foreach: seniorHousingAndCareCategories, validationElement: seniorHousingAndCareCategories">
+                <div>
+                    @{ Html.RenderPartial("Partial/CheckBox"); }
+                </div>
+            </div>
+            <div class="checkbox-list-error-message">
+                <span class="field-validation-error" data-bind="validationMessage: seniorHousingAndCareCategories"></span>
+            </div>
+        </div>
+        <div>
+            <div class="field-label">
+                <label>@DisplayNames.AgeRestrictions</label>
+            </div>
+            <div class="checkbox-list" data-bind="foreach: ageRestrictions">
+                <div>
+                    @{ Html.RenderPartial("Partial/CheckBox");
+                    }
+                </div>
+            </div>
+        </div>
+        Html.RenderPartial("Partial/Address");
+        <div class="checkbox inline-block">
+            <label>
+                <input type="checkbox" data-bind="checked: doNotDisplayAddress" />
+                <span>@DisplayNames.DoNotDisplayAddressOnline</span>
+            </label>
+        </div>
+
+        Html.RenderPartial("Partial/EmailList");
+        <div>
+            <span class="btn btn-small btn-info" data-bind="click: addContact">
+                @StaticContent.WtrMrk_AddContact
+            </span>
+            <!-- ko foreach: contacts -->
+            <div>
+                <div class="inline-block">
+                    <div class="field-label">
+                        <label>@DisplayNames.ContactType</label>
+                    </div>
+                    <div>
+                        <select data-bind="options: contactTypes, value: contactTypeId, optionsText: 'text', optionsValue: 'value'"></select>
+                    </div>
+                </div>
+                <div class="inline-block">
+                    <div class="field-label">
+                        <label>@DisplayNames.ContactFirstName</label>
+                    </div>
+                    <div>
+                        <input type="text" data-bind="textInput: firstName, validationElement: firstName" />
+                    </div>
+                </div>
+                <div class="inline-block">
+                    <div class="field-label">
+                        <label>@DisplayNames.ContactLastName</label>
+                    </div>
+                    <div>
+                        <input type="text" data-bind="textInput: lastName, validationElement: lastName" />
+                    </div>
+                </div>
+                <span class="btn btn-mini btn-danger" data-bind="visible: $parent.contacts().length > 1, click: $parent.deleteContact">
+                    @StaticContent.Btn_Delete
+                </span>
+                <span class="field-validation-error" data-bind="validationMessage: firstName"></span>
+                <br />
+                <span class="field-validation-error" data-bind="validationMessage: lastName"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div id="officeHours">
+            <div class="field-label">
+                <label>@DisplayNames.OfficeHours</label>
+                <span id="addOfficeHours" class="btn btn-small btn-info" data-bind="click: addOfficeHours">
+                    @StaticContent.WtrMrk_AddOfficeHours
+                </span>
+            </div>
+            <!-- ko foreach: officeHours -->
+            <div class="office-hours">
+                @{ Html.RenderPartial("Partial/OfficeHours"); }
+                <span class="btn btn-mini btn-danger" data-bind="visible: $parent.officeHours().length > 1, click: $parent.deleteOfficeHours">
+                    @StaticContent.Btn_Delete
+                </span>
+                <span class="field-validation-error" data-bind="validationMessage: startDay"></span>
+                <br />
+                <span class="field-validation-error" data-bind="validationMessage: note"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="field-label">
+            <label>@StaticContent.Lbl_Description</label>
+        </div>
+        <div class="checkbox inline-block">
+            <label>
+                <input type="checkbox" data-bind="checked: displayWebsiteUrl" />
+                <span>@DisplayNames.DisplayWebsiteAddressOnline</span>
+            </label>
+        </div>
+        <!-- ko with: communityDetails -->
+        <div>
+            <label>@StaticContent.Lbl_PaymentsAccepted</label>
+        </div>
+        <div class="checkbox-list" data-bind="foreach: paymentTypes">
+            <div>
+                @{ Html.RenderPartial("Partial/CheckBox");}
+            </div>
+        </div>
+        <div>
+            <label>@StaticContent.Lbl_PriceRange</label>
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/MeasureBoundary", "priceRange");
+            }
+        </div>
+        <div>
+            <label>@StaticContent.Lbl_Deposit</label>
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/MeasureBoundary", "deposit");
+            }
+        </div>
+        <div>
+            <label>@StaticContent.Lbl_ApplicationFee</label>
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/MeasureBoundary", "applicationFee");
+            }
+        </div>
+        <div>
+            <label>@StaticContent.Lbl_PetDeposit</label>
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/MeasureBoundary", "petDeposit");
+            }
+        </div>
+        <div>
+            <label>@StaticContent.Lbl_LivingSpace</label>
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/MeasureBoundary", "livingSpace");
+            }
+        </div>
+        <div>
+            <div>
+                <label>
+                    @StaticContent.Lbl_Bedrooms
+                </label>
+            </div>
+            <select data-bind="options: availableBedroomsFromQuantity, value: bedroomFromId, optionsText: 'text', optionsValue: 'value',
+    optionsCaption: '@StaticContent.WtrMrk_Min    '">
+            </select>
+            <span class="dash">-</span>
+            <select data-bind="options: availableBedroomsToQuantity, value: bedroomToId, optionsText: 'text', optionsValue: 'value',
+    optionsCaption: '@StaticContent.WtrMrk_Max    '">
+            </select>
+        </div>
+        <div>
+            <div>
+                <label>
+                    @StaticContent.Lbl_Bathrooms
+                </label>
+            </div>
+            <select data-bind="options: availableBathroomsFromQuantity, value: bathroomFromId, optionsText: 'text', optionsValue: 'value',
+    optionsCaption: '@StaticContent.WtrMrk_Min    '">
+            </select>
+            <span class="dash">-</span>
+            <select data-bind="options: availableBathroomsToQuantity, value: bathroomToId, optionsText: 'text', optionsValue: 'value',
+    optionsCaption: '@StaticContent.WtrMrk_Max    '">
+            </select>
+        </div>
+        <div>
+            <label>@DisplayNames.UnitCount</label>
+        </div>
+        <div>
+            <input type="text"
+                   data-bind="textInput: unitCount, event: { keypress: function(data, event) { return onUnitCountKeypress(unitCount(), event);  }, validationElement: unitCount" />
+            <span class="field-validation-error" data-bind="validationMessage: unitCount" />
+        </div>
+        <div>
+            <label>@DisplayNames.Amenities</label>
+        </div>
+        <div>
+            <div class="default-amenities" data-bind="foreach: defaultAmenities">
+                <div class="default-amenity">
+                    @{ Html.RenderPartial("Partial/CheckBox");
+                    }
+                </div>
+            </div>
+            <div class="amenities">
+                <span class="btn btn-small btn-info" data-bind="click: addAmenity">
+                    @StaticContent.WtrMrk_AddAmenity
+                </span>
+                <!-- ko foreach: customAmenities -->
+                <div>
+                    <input type="text" placeholder="@StaticContent.WtrMrk_EnterFeatureOrAmenity" data-bind="textInput: name, validationElement: name" />
+                    <span class="btn btn-mini btn-danger" data-bind="visible: $parent.customAmenities().length > 1, click: $parent.deleteAmenity">
+                        @StaticContent.Btn_Delete
+                    </span>
+                    <span class="field-validation-error" data-bind="validationMessage: name"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div>
+            <label>@DisplayNames.CommunityServices</label>
+        </div>
+        <div>
+            <div class="default-community-services" data-bind="foreach: defaultCommunityServices">
+                <div class="default-community-service">
+                    @{ Html.RenderPartial("Partial/CheckBox");
+                    }
+                </div>
+            </div>
+            <div class="community-services">
+                <span class="btn btn-small btn-info" data-bind="click: addCommunityService">
+                    @StaticContent.WtrMrk_AddCommunityService
+                </span>
+                <!-- ko foreach: customCommunityServices -->
+                <div>
+                    <input type="text" placeholder="@StaticContent.WtrMrk_EnterCommunityService" data-bind="textInput: name, validationElement: name" />
+                    <span class="btn btn-mini btn-danger"
+                          data-bind="visible: $parent.customCommunityServices().length > 1, click: $parent.deleteCommunityService">
+                        @StaticContent.Btn_Delete
+                    </span>
+                    <span class="field-validation-error" data-bind="validationMessage: name"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/ImageList", "logoImages");
+            }
+        </div>
+        <div>
+            @{ Html.RenderPartial("Partial/ImageList", "images");
+            }
+        </div>
+        if (Model.Package.HasValue && Model.Package == MSLivingChoices.Entities.Admin.Enums.PackageType.Enhanced)
+        {
+            <div>
+                <div>
+                    <label>@DisplayNames.VirtualTour</label>
+                </div>
+                <div>
+                    <input type="text" data-bind="textInput: virtualTour, validationElement: virtualTour" />
+                    <span class="field-validation-error" data-bind="validationMessage: virtualTour"></span>
+                </div>
+            </div>
+        }
+        Html.RenderPartial("Partial/Coupon");
+        <div>
+            <label class="checkbox inline-block">
+                <input type="checkbox" data-bind="checked: hasFloorPlans" />
+                <span>@DisplayNames.FloorPlans</span>
+            </label>
+            <div id="floorPlans" data-bind="slideVisible: hasFloorPlans">
+                <!-- ko foreach: floorPlans -->
+                <div class="floor-plan">
+                    <div class="content">
+                        <div>
+                            <label>@DisplayNames.FloorPlan</label>
+                        </div>
+                        <div>
+                            <input type="text" data-bind="textInput: name, validationElement: name" />
+                            <span class="field-validation-error" data-bind="validationMessage: name"></span>
+                        </div>
+                        @{ Html.RenderPartial("Partial/FloorPlan");
+                        }
+                    </div>
+                    <div class="delete-button">
+                        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.floorPlans().length > 1, click: $parent.deleteFloorPlan">
+                            @StaticContent.Btn_Delete
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="field-validation-error" data-bind="validationMessage: floorPlans"></div>
+                <div>
+                    <span class="btn btn-small btn-info" data-bind="click: addFloorPlan">
+                        @StaticContent.WtrMrk_AddFloorPlan
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label class="checkbox inline-block">
+                <input type="checkbox" data-bind="checked: hasSpecHomes" />
+                <span>@DisplayNames.SpecHomes</span>
+            </label>
+            <div data-bind="slideVisible: hasSpecHomes">
+                <!-- ko foreach: specHomes -->
+                <div class="spec-home">
+                    <div class="content">
+                        <div>
+                            <label>@DisplayNames.SpecHome</label>
+                        </div>
+                        <div>
+                            <input type="text" data-bind="textInput: name, validationElement: name" />
+                            <span class="field-validation-error" data-bind="validationMessage: name"></span>
+                        </div>
+                        @{ Html.RenderPartial("Partial/SpecHome");
+                        }
+                    </div>
+                    <div class="delete-button">
+                        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.specHomes().length > 1, click: $parent.deleteSpecHome">
+                            @StaticContent.Btn_Delete
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="field-validation-error" data-bind="validationMessage: specHomes"></div>
+                <div>
+                    <span class="btn btn-small btn-info" data-bind="click: addSpecHome">
+                        @StaticContent.WtrMrk_AddSpecHome
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label class="checkbox inline-block">
+                <input type="checkbox" data-bind="checked: hasHouses" />
+                <span>@DisplayNames.Houses</span>
+            </label>
+            <div data-bind="slideVisible: hasHouses">
+                <!-- ko foreach: houses -->
+                <div class="house">
+                    <div class="content">
+                        <div>
+                            <label>@DisplayNames.House</label>
+                        </div>
+                        <div>
+                            <input type="text" data-bind="textInput: name, validationElement: name" />
+                            <span class="field-validation-error" data-bind="validationMessage: name"></span>
+                        </div>
+                        @{ Html.RenderPartial("Partial/House");
+                        }
+                    </div>
+                    <div class="delete-button">
+                        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.houses().length > 1, click: $parent.deleteHouse">
+                            @StaticContent.Btn_Delete
+                        </span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="field-validation-error" data-bind="validationMessage: houses"></div>
+                <div>
+                    <span class="btn btn-small btn-info" data-bind="click: addHouse">
+                        @StaticContent.WtrMrk_AddHouse
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko with: listingDetails -->
+        <div>
+            <label>@Enums.OwnerType_PropertyManager</label>
+        </div>
+        Html.RenderPartial("Partial/Owner", "propertyManager");
+        <div>
+            <label>@Enums.OwnerType_Builder</label>
+        </div>
+        Html.RenderPartial("Partial/Owner", "builder");
+
+        <span class="field-validation-error" data-bind="text: $parent.callTrackingWarning"></span>
+        <div class="call-tracking-phones" data-bind="css: {disable: !$parent.isPublished()}">
+            <label class="checkbox inline-block">
+                <input type="checkbox" data-bind="checked: provisionCallTrackingNumbers" />
+                <span>@DisplayNames.ProvisionCallTrackingNumbers</span>
+            </label>
+            <div data-bind="slideVisible: provisionCallTrackingNumbers">
+                <span class="btn btn-small btn-info" data-bind="click: addCallTrackingPhone">
+                    @StaticContent.WtrMark_AddCallTrackingPhone
+                </span>
+                <!-- ko foreach: callTrackingPhones -->
+                <div class="call-tracking-phone">
+                    @{ Html.RenderPartial("Partial/CallTrackingPhone");
+                    }
+                    <!-- ko if: !provisionPhone() && $parent.callTrackingPhones().length > 1 -->
+                    <span class="btn btn-mini btn-danger delete-call-tracking-phone" data-bind="click: $parent.deleteCallTrackingPhone">
+                        @StaticContent.Btn_Delete
+                    </span>
+                    <!-- /ko -->
+                    <div class="call-tracking-resume-area"
+                         data-bind="if: provisionPhone()">
+                        <span class="btn btn-mini btn-warning "
+                              data-bind="visible: !isDisconnected(), click: $parent.disconnectCallTrackingPhone">
+                            @StaticContent.Btn_Disconnect
+                        </span>
+                        <span class="btn btn-mini btn-success"
+                              data-bind="visible: isDisconnected(), click: $parent.resumeCallTrackingPhone">
+                            @StaticContent.Btn_Resume
+                        </span>
+                        <div class="expires-info" data-bind="visible: isDisconnected(), text: resumeInfo"></div>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+        @*NOTE: Hidden until business rules won't change*@
+        @*<div>
+                <div class="inline-block">
+                    <label>@DisplayNames.ShowcaseStart</label>
+                    <input type="text" data-bind="datepicker: showcaseStart, validationElement: showcaseStart" />
+                </div>
+                <div class="inline-block">
+                    <label>@DisplayNames.ShowcaseEnd</label>
+                    <input type="text" data-bind="datepicker: showcaseEnd" />
+                </div>
+                <div>
+                    <span class="field-validation-error" data-bind="validationMessage: showcaseStart"></span>
+                </div>
+            </div>*@
+        <div data-bind="visible: addressValidation.validationItems().length">
+            @{ Html.RenderPartial("Partial/AddressValidation"); }
+        </div>
+    }
+}
+<div class="submit-area">
+    <input type="button" class="btn btn-primary" value="@StaticContent.Btn_SaveAndSubmit" data-bind="click: submit" />
+</div>
+@*<div class="alert alert-block alert-error" data-bind="visible: !isValid()" style="display:none;">
+        <ul data-bind="foreach: errors">
+            <li data-bind="text: $data"></li>
+        </ul>
+    </div>*@

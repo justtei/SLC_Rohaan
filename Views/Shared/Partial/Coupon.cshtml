@@ -1,0 +1,34 @@
+﻿@using MSLivingChoices.Localization
+<div data-bind="with: coupon">
+    <div>
+        <label>@DisplayNames.Coupon</label>
+    </div>
+    <div>
+        <input type="text" data-bind="textInput: name, validationElement: name"/>
+        <span class="field-validation-error" data-bind="validationMessage: name"></span>
+    </div>
+    <div>
+        <label>@DisplayNames.CouponDescription</label>
+    </div>
+    <div class="coupon-description">
+        <textarea data-bind="textInput: description, validationElement: description"></textarea>
+        <br/>
+        <div class="description-character-counter" data-bind="text: descriptionCharacterCounter"></div>
+        <div class="coupon-error-message">
+            <span class="field-validation-error" data-bind="validationMessage: description"></span>
+        </div>
+    </div>
+    <div>
+        <label>@StaticContent.Lbl_PublishDate</label>
+    </div>
+    <div>
+        <input type="text" data-bind="datepicker: publishDate, validationElement: publishDate"/>
+        <span class="field-validation-error" data-bind="validationMessage: publishDate"></span>
+    </div>
+    <div>
+        <label>@StaticContent.Lbl_ExpirationDate</label>
+    </div>
+    <div>
+        <input type="text" data-bind="datepicker: expirationDate"/>
+    </div>
+</div>

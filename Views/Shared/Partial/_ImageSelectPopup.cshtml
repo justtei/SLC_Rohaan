@@ -1,0 +1,114 @@
+﻿@using MSLivingChoices.Localization
+@model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.UploadImageVm
+<div id="selectImageModalDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="addImageModalLabel">
+            @StaticContent.Lbl_ImageManager
+        </h3>
+    </div>
+    @using (Html.BeginForm("Upload", "Image", FormMethod.Post, new { id = "imageUploadForm", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.X)
+        @Html.HiddenFor(model => model.Y)
+        @Html.HiddenFor(model => model.Width)
+        @Html.HiddenFor(model => model.Height)
+        @Html.HiddenFor(model => model.ImageType)
+        @Html.HiddenFor(model => model.Base64Image)
+        <div class="modal-body" id="addImageModalBody">
+            <div id = "image-container">
+                <div id = "errorAllert" class = "alert alert-error fade in display-none" aria-hidden="true">
+                    <button type="button" class = "close">x</button>
+                    <p>@ErrorMessages.ImgUploadError</p>
+                </div>
+                <div id = "fileInput">
+                    <div class = "fileinput-button-container">
+                        <div>
+                            <span class = "btn btn-success fileinput-button">
+                                <i class="icon-plus icon-white"></i>
+                                <span>@StaticContent.Lbl_AddSourceImages</span>
+                                <input type = "file" multiple="multiple" name = "File"/>
+                            </span>
+                        </div>
+                        <div>
+                            <span>@StaticContent.Lbl_UploadNewImages</span>
+                        </div>
+                    </div>
+                    <div class = "fileupload-buttonbar">
+                        <div class = "fileupload-progress fade">
+                            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                <div class = "bar">
+                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "preview-container">
+                    <div>
+                        <label><b>@StaticContent.Lbl_SourceImages</b></label>
+                    </div>
+                    <div>
+                        <ul id = "preview-carusel" class="thumbnails jcarousel-skin-tango">
+                     
+                        </ul>
+                    </div>
+                </div>
+                <div class = "modify-image-container">
+                    <div>
+                        <label><b>@StaticContent.Lbl_ProcessedImages</b></label>
+                    </div>
+                    <div>
+                        <ul id = "modify-carousel" class = "thumbnails jcarousel-skin-tango">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id = "cropAndResizeContainer" class="display-none">
+                <div id = "cropAndResizeHeader">
+                    <div id = "cropAndResizeHeader-text">
+                        <label><b>@StaticContent.Lbl_CropOrResizeImage</b></label>
+                    </div>
+                    <div id = "toogleStateSwith" class = "switch" data-on-label="@StaticContent.Lbl_Crop" data-off-label="@StaticContent.Lbl_Resize">
+                        @Html.CheckBoxFor(m => m.IsCropImage)
+                    </div>
+                </div>
+
+
+                <div id = "crop-container" class="display-none">
+                    <div id="uploadCut">
+                        <img alt="@StaticContent.Alt_FieldForImageCutting" id="preview" src="@Url.Content("~/Content/imageUploader/empty.png")" />
+                    </div>
+                </div>
+            
+                <div id = "resize-container" class="display-none">
+                    <div id = "uploadResize">
+                        <img alt="@StaticContent.Alt_FieldForImageCutting" id="preview-resize" src="@Url.Content("~/Content/imageUploader/empty.png")"/>
+                    </div>
+                    <div id = "slider-size">
+                        
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    }
+    <div class="modal-footer">
+        <div id = "saveButtons">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                @StaticContent.Btn_Cancel
+            </button>
+            <button id = "saveImageButton" class = "btn btn-primary" aria-hidden="true">
+                @StaticContent.Btn_Save
+            </button>
+        </div>
+        <div id = "cropAndResizeButtons" class="display-none">
+            <button id = "cropCancelButton" class="btn">
+                @StaticContent.Btn_Cancel
+            </button>
+            <input type="submit" id="imageUploadButton" value="@StaticContent.Btn_Done" class="btn btn-primary" />
+        </div>
+    </div>
+</div>

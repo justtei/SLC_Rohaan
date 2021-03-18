@@ -1,0 +1,342 @@
+﻿@using System.Web.Script.Serialization
+@using MSLivingChoices.Entities.Admin.Enums
+@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.GridVm<MSLivingChoices.Mvc.Uipc.Admin.ViewModels.ServiceProviderForGridVm>
+    @{
+        ViewBag.Title = "Service Provider Grid";
+    }
+    @section scripts
+{
+        @Url.Script("legacy/jquery/jquery-ui-1.9.2.min.js")
+        @Url.Script("legacy/jquery/jquery.validate.min.js")
+        @Url.Script("legacy/jquery/jquery.validate.unobtrusive.min.js")
+        @Url.Script("legacy/knockout/knockout-2.2.0.js")
+        @Url.Script("legacy/custom/datepicker.js")
+        @Url.Script("legacy/custom/grids/grid.js")
+        @Url.Script("legacy/custom/grids/editableGrid.js")
+        @Url.Script("legacy/custom/grids/serviceProviderGrid.js")
+        <script type="text/javascript">
+        $(function() { initializeServiceProviderGrid(@Html.Raw(new JavaScriptSerializer().Serialize(Model))); });
+        </script>
+    }
+    @section css
+{
+        @Url.Css("themes/base/jquery.ui.core.css")
+        @Url.Css("themes/base/jquery.ui.theme.css")
+        @Url.Css("themes/base/jquery.ui.datepicker.css")
+        @Url.Css("themes/base/jquery.ui.dialog.css")
+        @Url.Css("css/grid.css")
+    }
+    @{ Html.RenderPartial("Partial/_AjaxServerError"); }
+    <table id="serviceProviderGrid" class="grid editable-grid">
+        <thead>
+            <tr>
+                <th>
+                    <span id="serviceProviderNameHeader" class="header">
+                        <span data-bind="click: sortByServiceProviderName" class="header-title" title="@StaticContent.Tlt_Sort">
+                            <span>@StaticContent.Lbl_ServiceProvider</span>
+                            <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.ServiceProvider    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                            </span>
+                        </span>
+                        <span data-bind="click: toggleServiceProviderNameFilter, css: { applied: filter.serviceProviderName }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                            <span class="filter-icon"></span>
+                        </span>
+                        <div data-bind="slideVisible: serviceProviderNameFilterIsVisible" class="filter name-filter">
+                            <input type="text" data-bind="value: filter.serviceProviderNameOption, event: { keydown: serviceProviderNameFilterOnKeyDown }" />
+                            <input type="button" data-bind="click: clearServiceProviderNameFilter, enable: filter.serviceProviderName" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                            <input type="button" data-bind="click: applyServiceProviderNameFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                        </div>
+                    </span>
+                </th>
+                <th>
+                    <span id="packageHeader" class="header">
+                        <span data-bind="click: sortByPackage" class="header-title" title="@StaticContent.Tlt_Sort">
+                            <span>@StaticContent.Lbl_Package</span>
+                            <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.Package    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                            </span>
+                        </span>
+                        <span data-bind="click: togglePackageFilter, css: { applied: packageFilterIsApplied }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                            <span class="filter-icon"></span>
+                        </span>
+                        <div data-bind="slideVisible: packageFilterIsVisible" class="filter">
+                            <!-- ko foreach: filter.packagesOption -->
+                            <label class="checkbox">
+                                <input type="checkbox" data-bind="checked: isChecked" />
+                                <!-- ko text: text -->
+                                <!-- /ko -->
+                            </label>
+                            <!-- /ko -->
+                            <input type="button" data-bind="click: clearPackageFilter, enable: packageFilterIsApplied" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                            <input type="button" data-bind="click: applyPackageFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                        </div>
+                    </span>
+                </th>
+                <th>
+                    <span id="serviceProviderCategoriesHeader" class="header">
+                        <span class="header-title">@StaticContent.Lbl_Categories</span>
+                        <span data-bind="click: toggleCategoriesFilter, css: { applied: categoryFilterIsApplied }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                            <span class="filter-icon"></span>
+                        </span>
+                        @* it's essential to use 'div' because it's necessary for jquery ui effects *@
+                        <div data-bind="slideVisible: categoriesFilterIsVisible" class="filter">
+                            <div class="filter-content">
+                                <!-- ko foreach: filter.categoriesOption -->
+                                <label class="checkbox">
+                                    <input type="checkbox" data-bind="checked: isChecked" />
+                                    <!-- ko text: text -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                            </div>
+                            <input type="button" data-bind="click: clearCategoriesFilter, enable:  categoryFilterIsApplied" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                            <input type="button" data-bind="click: applyCategoriesFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                        </div>
+                    </span>
+                </th>
+                @*Hidden until business rules won't change*@
+                @*<th>
+                        <span id="featureHeader" class="header">
+                            <span data-bind="click: sortByFeature" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@StaticContent.Lbl_Feature</span>
+                                <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.Feature    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleFeatureFilter, css: { applied: featureFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: featureFilterIsVisible" class="filter">
+                                <!-- ko foreach: checkboxFilterOptions -->
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $root.filter.featureOption" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearFeatureFilter, enable: featureFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyFeatureFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="featureStartDateHeader" class="header">
+                            <span data-bind="click: sortByFeatureStart" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@DisplayNames.FeatureStart</span>
+                                <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.FeatureStart    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleFeatureStartFilter, css: { applied: filter.featureStart }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: featureStartFilterIsVisible" class="filter">
+                                <span>From:</span>
+                                <input type="text" data-bind="value: filter.featureStartOption" class="date-picker" />
+                                <input type="button" data-bind="click: clearFeatureStartFilter, enable: filter.featureStart" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyFeatureStartFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="featureEndDateHeader" class="header">
+                            <span data-bind="click: sortByFeatureEnd" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@DisplayNames.FeatureEnd</span>
+                                <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.FeatureEnd    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleFeatureEndFilter, css: { applied: filter.featureEnd }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: featureEndFilterIsVisible" class="filter">
+                                <span>To:</span>
+                                <input type="text" data-bind="value: filter.featureEndOption" class="date-picker" />
+                                <input type="button" data-bind="click: clearFeatureEndFilter, enable: filter.featureEnd" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyFeatureEndFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>*@
+                <th>
+                    <span id="publishHeader" class="header">
+                        <span data-bind="click: sortByPublish" class="header-title" title="@StaticContent.Tlt_Sort">
+                            <span>@StaticContent.Lbl_Publish</span>
+                            <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.Publish    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                            </span>
+                        </span>
+                        <span data-bind="click: togglePublishFilter, css: { applied: publishFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                            <span class="filter-icon"></span>
+                        </span>
+                        <div data-bind="slideVisible: publishFilterIsVisible" class="filter">
+                            <!-- ko foreach: checkboxFilterOptions -->
+                            <label class="radio">
+                                <input type="radio" data-bind="value: $data, checked: $root.filter.publishOption" />
+                                <!-- ko text: $data -->
+                                <!-- /ko -->
+                            </label>
+                            <!-- /ko -->
+                            <input type="button" data-bind="click: clearPublishFilter, enable: publishFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                            <input type="button" data-bind="click: applyPublishFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                        </div>
+                    </span>
+                </th>
+                <th>
+                    <span id="publishStartDateHeader" class="header">
+                        <span data-bind="click: sortByPublishStart" class="header-title" title="@StaticContent.Tlt_Sort">
+                            <span>@DisplayNames.PublishStart</span>
+                            <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.PublishStart    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                            </span>
+                        </span>
+                        <span data-bind="click: togglePublishStartFilter, css: { applied: filter.publishStart }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                            <span class="filter-icon"></span>
+                        </span>
+                        <div data-bind="slideVisible: publishStartFilterIsVisible" class="filter">
+                            <span>From:</span>
+                            <input type="text" data-bind="value: filter.publishStartOption" class="date-picker" />
+                            <input type="button" data-bind="click: clearPublishStartFilter, enable: filter.publishStart" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                            <input type="button" data-bind="click: applyPublishStartFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                        </div>
+                    </span>
+                </th>
+                <th>
+                    <span id="publishEndDateHeader" class="header">
+                        <span data-bind="click: sortByPublishEnd" class="header-title" title="@StaticContent.Tlt_Sort">
+                            <span>@DisplayNames.PublishEnd</span>
+                            <span data-bind="visible: sortBy() == '@ServiceProviderGridSortByOption.PublishEnd    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                            </span>
+                        </span>
+                        <span data-bind="click: togglePublishEndFilter, css: { applied: filter.publishEnd }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                            <span class="filter-icon"></span>
+                        </span>
+                        <div data-bind="slideVisible: publishEndFilterIsVisible" class="filter">
+                            <span>To:</span>
+                            <input type="text" data-bind="value: filter.publishEndOption" class="date-picker" />
+                            <input type="button" data-bind="click: clearPublishEndFilter, enable: filter.publishEnd" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                            <input type="button" data-bind="click: applyPublishEndFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                        </div>
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: list">
+            <tr>
+                <td>
+                    <input type="hidden" data-bind="value: id" />
+                    <a data-bind="text: name, attr: { href: '@Url.Action("Edit")' + '?id=' + id }, click: $root.showOverlay" title="@StaticContent.Lbl_EditServiceProvider">
+                    </a>
+                </td>
+                <td class="not-editable">
+                    <span data-bind="text: package"></span>
+                    <div data-bind="fadeVisible: packageSelectorIsVisible" class="dialog">
+                        <div class="dialog-title">
+                            <span class="dialog-title-text">@StaticContent.Lbl_Package</span>
+                            <img data-bind="click: $root.closePackageSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                        </div>
+                        <div data-bind="foreach: packages" class="dialog-content">
+                            <div>
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $parent.selectedPackage" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                            </div>
+                        </div>
+                        <div data-bind="click: $root.changePackage" class="dialog-save-button">
+                            <input type="button" data-bind="disable: isDisabled" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                        </div>
+                    </div>
+                </td>
+                <td class="senior-housing-and-care-categories">
+                    <span data-bind="text: categories, click: $root.showCategoriesSelector" class="cursor-pointer"></span>
+                    <div data-bind="fadeVisible: categoriesSelectorIsVisible" class="dialog">
+                        <div class="dialog-title">
+                            <span class="dialog-title-text">@StaticContent.Lbl_Categories</span>
+                            <img data-bind="click: $root.closeCategoriesSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                        </div>
+                        <div data-bind="foreach: selectedCategories" class="dialog-content">
+                            <div>
+                                <label class="checkbox">
+                                    <input type="checkbox" data-bind="checked: isChecked" />
+                                    <!-- ko text: text -->
+                                    <!-- /ko -->
+                                </label>
+                            </div>
+                        </div>
+                        <div class="dialog-save-button">
+                            <input type="button" data-bind="click: $root.updateCategories, enable: categoriesSelectorIsValid() && !isDisabled()" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                        </div>
+                    </div>
+                </td>
+                @*Hidden until business rules won't change*@
+                @*<td class="feature">
+                        <input type="checkbox" data-bind="checked: feature, click: $root.changeFeature" />
+                    </td>
+                    <td>
+                        <span data-bind="text: featureStartDate, click: $root.showFeatureDatesSelector" class="cursor-pointer"></span>
+                        <div data-bind="fadeVisible: featureDatesSelectorIsVisible" class="dialog">
+                            <div class="dialog-title">
+                                <span class="dialog-title-text">@StaticContent.Lbl_FeatureDates</span>
+                                <img data-bind="click: $root.closeFeatureDatesSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                            </div>
+                            <div class="dialog-content">
+                                <div class="title">
+                                    @DisplayNames.FeatureStartDate
+                                    <span class="asterisk">*</span>
+                                </div>
+                                <div class="title">
+                                    <input type="text" data-bind="value: selectedFeatureStartDate" class="date-picker" />
+                                </div>
+                                <br />
+                                <div class="title">
+                                    @DisplayNames.FeatureEndDate
+                                </div>
+                                <div class="title">
+                                    <input type="text" data-bind="value: selectedFeatureEndDate" class="date-picker" />
+                                </div>
+                            </div>
+                            <div class="dialog-save-button">
+                                <input type="button" data-bind="click: $root.changeFeatureDates, enable: selectedFeatureStartDate() && !isDisabled()" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span data-bind="text: featureEndDate, click: $root.showFeatureDatesSelector" class="cursor-pointer"></span>
+                    </td>*@
+                <td class="publish">
+                    <input type="checkbox" data-bind="checked: publish, click: $root.changePublish" />
+                </td>
+                <td>
+                    <span data-bind="text: publishStartDate, click: $root.showPublishDatesSelector" class="cursor-pointer"></span>
+                    <div data-bind="fadeVisible: publishDatesSelectorIsVisible" class="dialog">
+                        <div class="dialog-title">
+                            <span class="dialog-title-text">@StaticContent.Lbl_PublishDates</span>
+                            <img data-bind="click: $root.closePublishDatesSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                        </div>
+                        <div class="dialog-content">
+                            <div class="title">
+                                @DisplayNames.PublishStartDate
+                                <span class="asterisk">*</span>
+                            </div>
+                            <div class="title">
+                                <input type="text" data-bind="value: selectedPublishStartDate" class="date-picker" />
+                            </div>
+                            <br />
+                            <div class="title">
+                                @DisplayNames.PublishEndDate
+                            </div>
+                            <div class="title">
+                                <input type="text" data-bind="value: selectedPublishEndDate" class="date-picker" />
+                            </div>
+                        </div>
+                        <div class="dialog-save-button">
+                            <input type="button" data-bind="click: $root.changePublishDates, enable: selectedPublishStartDate() && !isDisabled()" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span data-bind="text: publishEndDate, click: $root.showPublishDatesSelector" class="cursor-pointer"></span>
+                </td>
+                <td class="no-borders">
+                    <img src="@Url.Content("~/Content/images/loader.gif")" alt="@StaticContent.Alt_Loader" class="loader" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @{ @Html.Partial("Partial/_Paging", Model); }

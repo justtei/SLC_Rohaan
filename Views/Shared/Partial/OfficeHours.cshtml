@@ -1,0 +1,10 @@
+﻿@using MSLivingChoices.Localization
+<select data-bind="options: startDays, value: startDay, optionsText: 'text', optionsValue: 'value',
+    validationElement: startDay, optionsCaption: '@DisplayNames.StartDay'"></select>
+<span class="dash">-</span>
+<select data-bind="options: endDays, value: endDay, optionsText: 'text', optionsValue: 'value',
+    optionsCaption: '@DisplayNames.EndDay'"></select>
+<input type="text" class="time-picker" data-bind="timepicker: startTime"/>
+<span class="dash">-</span>
+<input type="text" class="time-picker" data-bind="timepicker: endTime"/>
+<input type="text" class="auto-width" data-bind="textInput: note, validationElement: note"/>

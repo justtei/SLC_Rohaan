@@ -1,0 +1,23 @@
+﻿@using MSLivingChoices.Localization
+<hr/>
+<select data-bind="options: categories, value: additionalInfoTypes.categoryClass, optionsText: 'text', optionsValue: 'value',
+    optionsCaption: categoriesCaption"></select>
+<!-- ko if: !additionalInfoTypes.isInUpdateProgress() && additionalInfoTypes.categoryClass-->
+<!-- ko with: additionalInfoTypes -->
+<!-- ko foreach: types -->
+<div>
+    <input type="text" data-bind="textInput: value"/>
+    <span class="btn btn-mini btn-danger" data-bind="click: $parent.deleteType">
+        @StaticContent.Btn_Delete
+    </span>
+</div>
+<!-- /ko -->
+<span class="btn btn-small btn-info" data-bind="click: addType">
+    @StaticContent.Btn_AddItem
+</span>
+<!-- /ko -->
+<br/>
+<div class="submit-area">
+    <input type="button" class="btn btn-primary" value="@StaticContent.Btn_SaveAndSubmit" data-bind="click: submit"/>
+</div>
+<!-- /ko -->

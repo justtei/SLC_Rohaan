@@ -1,0 +1,717 @@
+﻿.grid
+{
+    font-size: 11px;
+    border-spacing: 0;
+    margin: auto;
+    border-collapse: separate;
+}
+
+#serviceProviderGrid
+{
+    text-align: center;
+}
+
+#serviceProviderGrid th
+{
+    padding: 0;    
+}
+
+/* +++++++++++++ filter +++++++++++ */
+
+.filter-icon-wrapper
+{
+    display: block;
+    width: 20px;
+    height: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+.filter-icon-wrapper.applied
+{
+    background: white;
+}
+
+.filter-icon
+{
+    background-image: url('../images/sprite.png');
+    width: 16px;
+    height: 16px;
+    display: block;
+    vertical-align: sub;
+    background-position: -32px -80px;
+    margin: 5px 2px;
+    opacity: .8;
+}
+
+.filter-icon-wrapper:hover .filter-icon
+{
+    opacity: 1;
+}
+
+.filter
+{
+    z-index: 1;
+    top: 31px;
+    position: absolute;
+    background: #F2F2F2;
+    padding: 5px;
+    border: 1px solid #BBBBBB;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    display: none;
+}
+
+.listing-type-header .filter, #showcaseHeader .filter, #publishHeader .filter
+{
+    left: 46px;
+    width: 85px;
+}
+
+.filter input[type=text]
+{
+    line-height: normal;
+    padding: 0 3px;
+    width: 150px;
+    font-size: 12px;
+}
+
+.filter-button
+{
+    float: right;
+}
+
+/* ------------- filter ----------- */
+
+/* +++++++++++++ column headers +++++++++++ */
+
+.header
+{
+    display: block;
+    text-align: left;
+    position: relative; /* for filter */
+}
+
+.header-title
+{
+    display: block;
+    float: left;
+    padding: 5px 0 5px 5px;
+    cursor: pointer;
+}
+
+#communityNameHeader
+{
+    width: 200px;
+}
+
+#communityNameHeader .header-title
+{
+    width: auto;
+}
+
+#bookNumberHeader, #bookNumberHeader .header-title
+{
+    width: 100px;
+}
+
+#packageHeader
+{
+    width: 100px;
+}
+
+ #packageHeader .header-title 
+ {
+     width: 75px;
+ }
+ 
+.listing-type-header
+{
+    width: 66px;
+}
+
+.listing-type-header .header-title
+{
+    width: 41px;
+}
+
+#categoriesHeader
+{
+    width: 225px;
+    display: block;
+}
+
+#categoriesHeader .header-title
+{
+    width: 200px;
+    display: block;
+}
+
+#serviceProviderCategoriesHeader
+{
+    display: block;
+}
+
+#serviceProviderCategoriesHeader .header-title
+{
+    width: 255px;
+    display: block;
+}
+
+#showcaseHeader
+{
+    width: 102px;
+}
+
+#featureHeader
+{
+    width: 90px;
+}
+
+#showcaseHeader .header-title
+{
+    width: 77px;
+}
+
+#showcaseStartDateHeader
+{
+    width: 130px;
+}
+
+#showcaseStartDateHeader .header-title 
+{
+    width: 105px;
+}
+
+#showcaseEndDateHeader 
+{
+    width: 130px;
+}
+
+#showcaseEndDateHeader .header-title 
+{
+    width: 105px;
+}
+
+#publishHeader
+{
+    width: 85px;
+}
+
+#publishHeader .header-title
+{
+    width: 60px;
+}
+
+#publishStartDateHeader 
+{
+    width: 130px;
+}
+
+#publishStartDateHeader .header-title 
+{
+    width: 105px;
+}
+
+#publishEndDateHeader 
+{
+    width: 130px;
+}
+
+ #publishEndDateHeader .header-title 
+ {
+     width: 105px;
+ }
+
+#publishEndDateHeader .filter 
+{
+    left: 110px;
+}
+
+#publishStartDateHeader .filter 
+{
+    left: 110px;
+}
+
+#showcaseEndDateHeader .filter 
+{
+    left: 110px;
+}
+
+#showcaseStartDateHeader .filter
+{
+    left: 110px;   
+}
+
+#serviceProviderCategoriesHeader .filter
+{
+    left: 260px;
+    width: 280px;
+}
+
+#serviceProviderNameHeader
+{
+    width: auto;
+}
+
+#serviceProviderNameHeader .filter
+{
+    left: 160px;
+}
+
+#featureStartDateHeader .filter
+{
+    left: 60px;
+}
+
+#featureEndDateHeader .filter
+{
+    left: 60px;
+}
+
+#featureHeader .filter
+{
+    width: 90px;
+    left: 75px;
+}
+
+#showcaseHeader .filter
+{
+    left: 82px;
+}
+
+#publishHeader .filter
+{
+    left: 65px;
+}
+
+#communityNameHeader .filter
+{
+    left: 180px;
+}
+
+#packageHeader .filter
+{
+    left: 80px;
+    width: 80px;
+}
+
+#categoriesHeader .filter
+{
+    left: 200px;
+    width: 150px;
+}
+
+#serviceProviderCategoriesHeader .filter-content
+{
+    max-height: 300px;
+    overflow: auto;
+}
+
+.sort-icon
+{
+    background-image: url('../bootstrap/images/glyphicons-halflings.png');
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: sub;
+    background-position: -312px -120px;
+}
+
+.sort-icon.desc-icon
+{
+    background-position: -288px -120px;
+}
+
+/* ------------- column headers ----------- */
+
+.grid thead, .dialog .dialog-title
+{
+    background: #E6E6E6;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFE6E6E6',GradientType=0, Enabled=true); /*IE 6-9*/
+    background-image: -webkit-linear-gradient(top,white 0,#E6E6E6 100%);
+    background-image: -moz-linear-gradient(top,white 0,#E6E6E6 100%);
+    background-image: -o-linear-gradient(top,white 0,#E6E6E6 100%);
+    background-image: -linear-gradient(to bottom,white 0,#E6E6E6 100%);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(white), to(#E6E6E6)); /*safari*/
+    background-image: -ms-linear-gradient(top, white 0,#E6E6E6 100%); /*IE 10*/
+}
+
+.grid th:first-child
+{
+    border-top-left-radius: 5px;
+}
+
+.grid th:last-child
+{
+    border-top-right-radius: 5px;
+}
+
+.grid tr:last-child td:first-child
+{
+    border-bottom-left-radius: 5px;
+}
+
+.grid.editable-grid tr:last-child td:nth-last-child(2)
+{
+    border-bottom-right-radius: 5px;
+}
+
+.grid:not(.editable-grid) tr:last-child td:last-child
+{
+    border-bottom-right-radius: 5px;
+}
+
+.grid tbody tr:nth-child(even) td:not(.no-borders)
+{
+    background-color: #F2F2F2;
+}
+
+.grid tr:hover td:not(.no-borders)
+{
+    background: #DFDFDF !important;
+}
+
+.grid td
+{
+    color: blue;
+    position: relative;
+    padding: 5px;
+}
+
+.grid td.not-editable
+{
+    color: rgb(97, 52, 52);
+}
+
+.grid td.senior-housing-and-care-categories
+{
+    width: 200px;
+    text-align: center;
+}
+
+.grid#serviceProviderGrid td.senior-housing-and-care-categories
+{
+    width: 300px;
+}
+
+.grid td.senior-housing-and-care-categories .dialog
+{
+    min-width: 230px;
+}
+
+#communityGrid th
+{
+    padding: 0;
+}
+
+.grid th
+{
+    padding: 5px;
+}
+
+
+.grid td, .grid th
+{
+    border: 1px solid #BBBBBB;
+    border-left: none;
+    border-bottom: none;
+    cursor: default;
+}
+
+.grid td.date
+{
+    text-align: center;
+}
+
+.grid td.publish input[type=checkbox],
+.grid td.feature input[type=checkbox],
+.grid td:first-child input[type=checkbox],
+.grid th:first-child input[type=checkbox],
+.grid td.active-adult-communities input[type=checkbox],
+.grid td.active-adult-homes input[type=checkbox],
+.grid td.senior-housing-and-care input[type=checkbox],
+.grid td.showcase input[type=checkbox]
+{
+    margin: 0;
+}
+
+.grid td:first-child, .grid th:first-child
+{
+    border-left: 1px solid #BBBBBB;
+}
+
+.grid td.no-borders
+{
+    border-top: none;
+    border-right: none;
+    border-bottom: none !important;
+    width: 20px;
+}
+
+.grid tr:last-child td
+{
+    border-bottom: 1px solid #BBBBBB;
+}
+
+/* +++++++++++ paging ++++++++++++++++ */
+
+#noItemsFound
+{
+    font-weight: bold;
+    margin-top: 10px;
+    display: none;
+}
+
+#paging select
+{
+    margin-bottom: 0;
+}
+
+#paging
+{
+    font-size: 12px;
+    text-align: center;
+}
+
+#paging select, #pagingTop
+{
+    font-size: 12px;
+}
+
+#pagingTop
+{
+    margin: 15px 0;
+}
+
+#pagingTop a
+{
+    text-decoration: none;
+    color: black;
+}
+
+#pagingTop img
+{
+    margin-top: -1px;
+    padding: 0 2px; /* for ie 9 */
+    border: none;
+}
+
+#pagingTop img[data-bind]
+{
+    cursor: pointer;
+}
+
+#pagingTop #pageNumbers
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#pagingTop #pageNumbers span
+{
+    background: #E5E5E5;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #BBB;
+    cursor: pointer;
+}
+
+#pagingTop #pageNumbers span.current-page
+{
+    background: white;
+    cursor: default;
+}
+
+#pagingBottom
+{
+    text-align: left;
+    width: 410px;
+    margin: 0 auto;
+}
+
+#pagingBottom #pageInfo
+{
+    font-weight: bold;
+    margin: 1px 0 0 10px;
+    border-radius: 5px;
+    border: 1px solid #BBB;
+    padding: 4px 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ----------- paging ---------------- */
+
+.loader
+{
+    display: none;
+}
+
+.grid a
+{
+    color: blue;
+    text-decoration: none;
+}
+
+.background
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.4;
+    cursor: default;
+}
+
+.cursor-pointer
+{
+    cursor: pointer;
+}
+
+/* +++++++++++ dialog ++++++++++++++++ */
+
+.dialog
+{
+    position: absolute;
+    text-align: left;
+    border: 1px solid #BBBBBB;
+    background: white;
+    cursor: default;
+    min-width: 150px;
+    color: black;
+    border-radius: 5px;
+    display: none;
+    z-index: 5;
+}
+
+.dialog .dialog-title
+{
+    border-bottom: 1px solid #BBBBBB;
+    padding: 5px;
+    height: 18px;
+    font-weight: bold;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.dialog .dialog-title .dialog-title-text
+{
+    vertical-align: sub;
+    float: left;
+}
+
+.dialog .dialog-title img
+{
+    float: right;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.dialog .dialog-content
+{
+    padding: 5px 5px 0 5px;
+}
+
+.dialog .dialog-save-button
+{
+    float: right;
+    margin: 0 10px 5px 0;
+    color: blue;
+    cursor: pointer;
+}
+
+/* ----------- dialog ---------------- */
+
+.grid label
+{
+    font-size: 11px;
+}
+
+.container
+{
+    width: auto;
+}
+
+#communityGridContainer
+{
+    margin-left: 5px;
+}
+
+.grid .book-number
+{
+    cursor: default;
+}
+
+.grid .btn.btn-mini.btn-danger
+{
+    margin: 0;
+}
+
+.grid .delete-column
+{
+    padding: 0 5px;
+}
+
+.ui-dialog
+{
+    font-size: 11px;
+}
+
+.ui-dialog .ui-icon.ui-icon-alert
+{
+    float: left;
+    margin-top: 2px;
+}
+
+.ui-dialog .delete-community-name
+{
+    font-weight: bold;
+}
+
+.ui-dialog .message
+{
+    float: right;
+    width: 255px;
+}
+
+.senior-housing-and-care-categories .dialog
+{
+    width: 450px;
+}
+
+.senior-housing-and-care-categories .dialog .dialog-content div
+{
+    float: left;
+    width: 220px;
+}
+
+.senior-housing-and-care-categories .dialog .dialog-content div:nth-child(odd)
+{
+    clear: left;
+}
+
+td.active-adult-communities, td.active-adult-homes, td.senior-housing-and-care, td.showcase, td.publish
+{
+    text-align: center;
+}
+
+#communityGrid td.publish
+{
+    padding-left: 20px;
+}
+
+.community-name-column
+{
+    width: 190px;
+}
+
+#validateCallTrackingPhoneButton
+{
+    width: 940px;
+    margin: auto;
+    text-align: right;
+    padding-bottom: 5px;
+    padding: 0 50px 10px 0;
+}

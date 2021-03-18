@@ -1,0 +1,236 @@
+﻿@using MSLivingChoices.Bcs.Admin.Components
+@using MSLivingChoices.Configuration
+@using MSLivingChoices.Entities.Admin.Enums
+@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy;
+@using ViewModelsProvider = MSLivingChoices.Mvc.Uipc.Admin.ViewModelsProviders
+<!DOCTYPE html>
+<html>
+<head>
+    @Url.Script("legacy/custom/google/googleAnalytics.js")
+    <title>@ViewBag.Title</title>
+    @Url.Css("bootstrap/bootstrap.min.css")
+    @Url.Css("css/goUpDownPanel.css")
+    @Url.Css("css/Site.css")
+    @RenderSection("css", false)
+</head>
+<body>
+    @{ Html.RenderPartial("Partial/_GoUpDownPanel"); }
+    <div id="overlay">
+        <div id="overlayBackground">
+        </div>
+        <div id="overlayImage">
+            <img src="@Url.Content("~/Content/images/loader_overlay.gif")" alt="@StaticContent.Msg_PleaseWait" />
+        </div>
+    </div>
+    <header>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+
+                        @if (SLC_Rohaan.Rohaanic.GetRoles.IsAdmin((int)Session["UserId"]))
+                        {
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MANAGE ALL ACCOUNTS<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("ALL USERS", "ViewUsers", "Account")
+                                </li>
+                                <li>@Html.ActionLink("Add Users", "Signup", "Account")</li>
+                            </ul>
+                    </li>
+
+
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                @Html.RouteLink("Categories", "Categories", new
+                                                {
+                                                    controller = "Category",
+                                                    action = "CategoryList"
+                                                })
+                                            </li>
+                                            <li>
+                                                @Html.RouteLink("Amenities", "Amenities", new
+                                                {
+                                                    controller = "Category",
+                                                    action = "AmenityList"
+                                                })
+                                            </li>
+                                            <li>@Html.ActionLink("Seo", "Index", "Seo")</li>
+                                        </ul>
+                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@StaticContent.AdminBar_Community<b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>@Html.ActionLink(StaticContent.AdminBar_All, "Grid", "Community")</li>
+                                                            <li>@Html.ActionLink(StaticContent.AdminBar_NewCommunity, "New", "Community")</li>
+                                                        </ul>
+                                                    </li>
+                                                                    <li class="dropdown">
+                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@StaticContent.AdminBar_ServiceProviders<b class="caret"></b></a>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li>@Html.ActionLink(StaticContent.AdminBar_All, "Grid", "ServiceProvider")</li>
+                                                                            <li>@Html.ActionLink(StaticContent.AdminBar_NewServiceProvider, "New", "ServiceProvider")</li>
+                                                                        </ul>
+                                                                    </li>}
+                        @if (SLC_Rohaan.Rohaanic.GetRoles.IsIList((int)Session["UserId"]))
+                        {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@StaticContent.AdminBar_CallTracking<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink(StaticContent.AdminBar_All, "Grid", "CallTracking")</li>
+                        </ul>
+                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@StaticContent.AdminBar_PMC<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                @Html.ActionLink(StaticContent.AdminBar_All, "Grid", "Owner", new
+                                                {
+                                                    type = OwnerType.PropertyManager
+                                                }, null)
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink(StaticContent.AdminBar_New, "New", "Owner", new
+                                                {
+                                                    type = OwnerType.PropertyManager
+                                                }, null)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@StaticContent.AdminBar_Builder<b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink(StaticContent.AdminBar_All, "Grid", "Owner", new
+                                                                {
+                                                                    type = OwnerType.Builder
+                                                                }, null)
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink(StaticContent.AdminBar_New, "New", "Owner", new
+                                                                {
+                                                                    type = OwnerType.Builder
+                                                                }, null)
+                                                            </li>
+                                                        </ul>
+                                                    </li>}
+                    </ul>
+                    @{ Html.RenderPartial("Partial/_LogIn", ViewModelsProvider.AdminViewModelsProvider.GetUserVm()); }
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        @RenderBody()
+        <hr />
+        @*<footer>
+                <div class="footer-row-item">
+                    &copy;@DateTime.Now.Year @StaticContent.Footer_Copyright
+                </div>
+                <div class="footer-row-item">
+                    <a href="https://www.aetsmsoft.com" target="_new">@StaticContent.Footer_AboutNewpoint</a>
+                </div>
+                <div class="footer-row-item">
+                    <a href="@Url.Action("PrivacyPolicy", "Client")">@StaticContent.Footer_PrivacyPolicy</a>
+                </div>
+                <div class="footer-row-item">
+                    <a href="@Url.Action("TermsOfUse", "Client")">@StaticContent.Footer_TermsOfUse</a>
+                </div>
+                <div class="footer-row-item">
+                    <a href="https://www.aetsmsoft.com/#contact">@StaticContent.Footer_ContactUs</a>
+                </div>
+            </footer>*@
+    </div>
+    @Url.Script("lib/jquery-1.8.2.js")
+    @Url.Script("legacy/bootstrap/bootstrap.min.js")
+    @Url.Script("legacy/jquery/jquery.placeholder.min.js")
+    @Url.Script("legacy/custom/overlay.js")
+    @Url.Script("legacy/custom/search.js")
+    @Url.Script("legacy/custom/goUpDownPanel.js")
+    <script type="text/javascript">
+        window.dateFormat = '@ConfigurationManager.Instance.AdminJsDateFormat';
+        window.defaultEndDate = '@ConfigurationManager.Instance.DefaultEndDate.ToString(ConfigurationManager.Instance.AdminServerDateFormat)';
+        window.defaultGridPageNumber = '@ConfigurationManager.Instance.DefaultGridPageNumber';
+        window.defaultGridPageSize = '@ConfigurationManager.Instance.DefaultGridPageSize';
+        $('[placeholder]').placeholder();
+        initOverlay();
+        initEditCommunityFormSubmit();
+    </script>
+    @{ Html.RenderPartial("Partial/ReactComponentLibraryDependencies"); }
+    @Url.Script("lib/jquery.switch.js")
+    @Url.Script("lib/jquery-ui-1.9.2.js")
+    @Url.Script("lib/jquery.timepicker.js")
+    @Url.Script("lib/jquery.imgareaselect.js")
+    @Url.Script("lib/jquery.jcarousel.min.js")
+    @Url.Script("lib/jquery.iframe-transport.js")
+    @Url.Script("lib/jquery.fileupload.js")
+    @Url.Script("lib/jquery.fileupload-ui.js")
+    @Url.Script("lib/jquery.fileupload-fp.js")
+    @Url.Script("lib/knockout-3.2.0.js")
+    @Url.Script("lib/knockout.validation.js")
+    @Url.Script("lib/moment.js")
+    @Url.Script("injector.js")
+    @Url.Script("libInject.js")
+    @Url.Script("admin/text/config.js")
+    @Url.Script("admin/text/text.js")
+    @{ Html.RenderPartial("Partial/Scripts/Config"); }
+    @Url.Script("admin/constants/constants.js")
+    @Url.Script("admin/constants/regexp.js")
+    @Url.Script("admin/models/enums/callTrackingPhoneType.js")
+    @Url.Script("admin/models/enums/keyCode.js")
+    @Url.Script("admin/models/enums/seoPageType.js")
+    @Url.Script("admin/models/js/location.js")
+    @Url.Script("admin/models/ko/addressValidationItem.js")
+    @Url.Script("admin/models/ko/amenity.js")
+    @Url.Script("admin/models/ko/checkbox.js")
+    @Url.Script("admin/models/ko/city.js")
+    @Url.Script("admin/models/ko/communityService.js")
+    @Url.Script("admin/models/ko/contact.js")
+    @Url.Script("admin/models/ko/country.js")
+    @Url.Script("admin/models/ko/coupon.js")
+    @Url.Script("admin/models/ko/email.js")
+    @Url.Script("admin/models/ko/image.js")
+    @Url.Script("admin/models/ko/keyValuePair.js")
+    @Url.Script("admin/models/ko/measureBoundary.js")
+    @Url.Script("admin/models/ko/officeHours.js")
+    @Url.Script("admin/models/ko/phone.js")
+    @Url.Script("admin/models/ko/phoneNumber.js")
+    @Url.Script("admin/models/ko/seoMetadata.js")
+    @Url.Script("admin/models/ko/state.js")
+    @Url.Script("admin/models/models.js")
+    @Url.Script("admin/extends/imageUploader.js")
+    @Url.Script("admin/extends/ko.js")
+    @Url.Script("admin/util/util.js")
+    @Url.Script("admin/util/ajax.js")
+    @Url.Script("admin.js")
+    @Url.Script("admin/controls/additionalInfoTypes.js")
+    @Url.Script("admin/controls/address.js")
+    @Url.Script("admin/controls/addressValidation.js")
+    @Url.Script("admin/controls/emails.js")
+    @Url.Script("admin/controls/images.js")
+    @Url.Script("admin/controls/floorPlan.js")
+    @Url.Script("admin/controls/googleMap.js")
+    @Url.Script("admin/controls/specHome.js")
+    @Url.Script("admin/controls/house.js")
+    @Url.Script("admin/controls/owner.js")
+    @Url.Script("admin/controls/phones.js")
+    @Url.Script("admin/controls/setOwner.js")
+    @Url.Script("admin/controls/callTrackingPhone.js")
+    @Url.Script("admin/controls/communityDetails.js")
+    @Url.Script("admin/controls/listingDetails.js")
+    @Url.Script("admin/controls/loadingOverlay.js")
+    @Url.Script("admin/controls/notification.js")
+    @Url.Script("admin/editors/callTrackingPhonesEditor.js")
+    @Url.Script("admin/editors/categoryEditor.js")
+    @Url.Script("admin/editors/communityEditor.js")
+    @Url.Script("admin/editors/ownerEditor.js")
+    @Url.Script("admin/editors/seoEditor.js")
+    @Url.Script("admin/editors/serviceProviderEditor.js")
+    @RenderSection("scripts", false)
+</body>
+</html>

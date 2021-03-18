@@ -1,0 +1,144 @@
+﻿html {
+}
+
+@import "../mixins.less";
+
+@map-stub-bg-color: #eeeeee;
+
+.map {
+    position: relative;
+
+    &.map-view{
+        .directions-control{
+            top: 20px;
+        }
+    }
+
+    .directions-control {
+        width: 51%;
+        position: absolute;
+        top: 50px;
+        left: 15px;
+        z-index: 1;
+
+        & > [class^='col-any-'] {
+            padding: 0;
+        }
+    }
+
+    .tab-pane {
+        height: 450px;
+        background-color: @map-stub-bg-color;
+
+        & > [class^='col-any-'] {
+            padding: 0;
+        }
+    }
+
+    .street-view-stub.active {
+        display: table-cell;
+    }
+}
+
+.direction {
+    width: 0;
+    background-color: @white;
+    overflow: hidden;
+    position: relative;
+    /*.prop-transition(width);*/
+
+    &.expanded {
+        width: 40%;
+        float: left;
+    }
+
+    .icon-startpoint:before,
+    .icon-endpoint:before {
+        margin-right: 5px;
+    }
+
+    .close {
+        font-size: 20px;
+        padding: 0;
+    }
+
+    .overview {
+        position:absolute;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .steps {
+        margin-top: 70px;
+        height: 380px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .step {
+            font-size: @font-size-decr;
+            padding-bottom: 10px;
+
+            .row {
+                padding: 5px 0;
+            }
+
+            .grid-row {
+                margin-right: 0;
+            }
+
+            .line {
+                padding-left: @grid-gutter-width /2;
+                border-bottom: 1px solid #d8d8d8;
+            }
+
+            .distance {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: auto;
+                text-indent: 5px;
+                background-color: @white;
+            }
+
+            .step-icon{
+                height: 17px;
+                width: 17px;
+            }
+        }
+    }
+}
+
+.map-canvas {
+    height: 100%;
+    width: 100%;
+    /*.prop-transition(width);*/
+
+    &.collapsed {
+        width: 60%;
+        float: left;
+    }
+
+    img {
+        max-width: none;
+    }
+
+    *,
+    *:before,
+    *:after {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+    .gm-style-iw * {
+        font-family: 'open_sansregular';
+
+        &,
+        .map-canvas .gm-style-iw *:before,
+        .map-canvas .gm-style-iw *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+﻿@using MSLivingChoices.Localization
+@model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.Common.SeoVm
+@section scripts
+{
+    <script type="text/javascript">
+        mslc.resolve(['lib/jQuery', 'admin/config', 'admin/editors/seoEditor'], function($, config, seoEditor) {
+            $(function() {
+                seoEditor.init(@MSLivingChoices.Mvc.Uipc.Legacy.HtmlHelpers.Json(Html, Model));
+            });
+        });
+    </script>
+}
+<div class="form-title">
+    @StaticContent.Ttl_Seo
+</div>
+<hr />
+<div>
+    <select data-bind="options: seoPages, value: seoPage, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_SelectSeoPage'"></select>
+    <select data-bind="visible: isPageTypeSelectVisible(), options: searchTypes, value: searchType, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_SelectSearchType'"></select>
+</div>
+<div>
+    <select data-bind="visible: searchType(), options: countries, value: countryId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_SelectCountry'"></select>
+    <select data-bind="visible: countryId(), options: states, value: stateId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_SelectState'"></select>
+    <select data-bind="visible: stateId(), options: cities, value: cityId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_SelectCity'"></select>
+</div>
+<div data-bind="visible: isDescriptionAndKeywordsVisible(), with: seoMetadata">
+    <div>
+        <label>@DisplayNames.MetaDescription</label>
+        <textarea data-bind="textInput: metaDescription"></textarea>
+        @*@Html.ValidationMessageFor(m => m.SeoMetadata.MetaDescription)*@
+    </div>
+    <div>
+        <label>@DisplayNames.MetaKeywords</label>
+        <textarea data-bind="textInput: metaKeywords"></textarea>
+        @*@Html.ValidationMessageFor(m => m.SeoMetadata.MetaKeywords)*@
+    </div>
+</div>
+<div data-bind="visible: isSeoCopyTextVisible">
+    <label>@DisplayNames.SeoCopyText</label>
+    <textarea data-bind="textInput: seoMetadata.seoCopyText"></textarea>
+    @*@Html.ValidationMessageFor(m => m.SeoMetadata.SeoCopyText)*@
+</div>
+<div data-bind="visible: isDescriptionAndKeywordsVisible()">
+    <input type="button" class="btn btn-primary" value="@StaticContent.Btn_Save" data-bind="click: submit"/>
+</div>

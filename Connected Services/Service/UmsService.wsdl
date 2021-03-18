@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UmsService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:57905/UmsService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:57905/UmsService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:57905/UmsService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Service" />
+      <xsd:import schemaLocation="http://localhost:57905/UmsService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UserManagementSystem.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUmsService_GetBrands_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBrands" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetBrands_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBrandsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetCities_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCities" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetCities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetCountries_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountries" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetCountries_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetEmailTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailTypes" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetEmailTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmailTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetPhoneTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypes" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetPhoneTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoneTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetStates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStates" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetStates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetUserBooks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBooks" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetUserBooks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetUserBooksByBrand_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBooksByBrand" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetUserBooksByBrand_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBooksByBrandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetUserBooksByBrandId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBooksByBrandId" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_GetUserBooksByBrandId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBooksByBrandIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_SetLeads_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetLeads" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_SetLeads_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetLeadsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_SetNotification_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetNotification" />
+  </wsdl:message>
+  <wsdl:message name="IUmsService_SetNotification_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetNotificationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUmsService">
+    <wsdl:operation name="GetBrands">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetBrands" message="tns:IUmsService_GetBrands_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetBrandsResponse" message="tns:IUmsService_GetBrands_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetCities" message="tns:IUmsService_GetCities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetCitiesResponse" message="tns:IUmsService_GetCities_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetCountries" message="tns:IUmsService_GetCountries_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetCountriesResponse" message="tns:IUmsService_GetCountries_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetEmailTypes" message="tns:IUmsService_GetEmailTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetEmailTypesResponse" message="tns:IUmsService_GetEmailTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetPhoneTypes" message="tns:IUmsService_GetPhoneTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetPhoneTypesResponse" message="tns:IUmsService_GetPhoneTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetStates" message="tns:IUmsService_GetStates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetStatesResponse" message="tns:IUmsService_GetStates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBooks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetUserBooks" message="tns:IUmsService_GetUserBooks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetUserBooksResponse" message="tns:IUmsService_GetUserBooks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBooksByBrand">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetUserBooksByBrand" message="tns:IUmsService_GetUserBooksByBrand_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetUserBooksByBrandResponse" message="tns:IUmsService_GetUserBooksByBrand_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBooksByBrandId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/GetUserBooksByBrandId" message="tns:IUmsService_GetUserBooksByBrandId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/GetUserBooksByBrandIdResponse" message="tns:IUmsService_GetUserBooksByBrandId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLeads">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/SetLeads" message="tns:IUmsService_SetLeads_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/SetLeadsResponse" message="tns:IUmsService_SetLeads_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetNotification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUmsService/SetNotification" message="tns:IUmsService_SetNotification_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUmsService/SetNotificationResponse" message="tns:IUmsService_SetNotification_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IUmsService" type="tns:IUmsService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBrands">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetBrands" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCities">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetCities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetCountries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmailTypes">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetEmailTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoneTypes">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetPhoneTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStates">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetStates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBooks">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetUserBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBooksByBrand">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetUserBooksByBrand" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBooksByBrandId">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/GetUserBooksByBrandId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLeads">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/SetLeads" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetNotification">
+      <soap:operation soapAction="http://tempuri.org/IUmsService/SetNotification" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UmsService">
+    <wsdl:port name="BasicHttpBinding_IUmsService" binding="tns:BasicHttpBinding_IUmsService">
+      <soap:address location="http://localhost:57905/UmsService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

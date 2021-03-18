@@ -1,0 +1,51 @@
+﻿@using MSLivingChoices.Localization
+<div class="address" data-bind="with: address">
+    <div class="field-label">
+        <label>@DisplayNames.StreetAddress</label>
+        <span class="asterisk">*</span>
+    </div>
+    <div>
+        <input type="text" data-bind="textInput: streetAddress, validationElement: streetAddress"/>
+        <span class="field-validation-error" data-bind="validationMessage: streetAddress"></span>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.Country</label>
+            <span class="asterisk">*</span>
+        </div>
+        <div data-bind="with: country">
+            <select data-bind="options: availableCountries, value: id, optionsText: 'text', optionsValue: 'value',
+                validationElement: id"></select>
+        </div>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.State</label>
+            <span class="asterisk">*</span>
+        </div>
+        <div data-bind="with: state">
+            <select data-bind="options: availableStates, value: id, optionsText: 'text', optionsValue: 'value',
+                validationElement: id, optionsCaption: '@StaticContent.WtrMrk_Select'"></select>
+        </div>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.City</label>
+            <span class="asterisk">*</span>
+        </div>
+        <div data-bind="with: city">
+            <select data-bind="options: availableCities, value: id, optionsText: 'text', optionsValue: 'value',
+                validationElement: id, optionsCaption: '@StaticContent.WtrMrk_Select'"></select>
+        </div>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.Zip</label>
+            <span class="asterisk">*</span>
+        </div>
+        <div>
+            <input type="text" data-bind="textInput: postalCode, validationElement: postalCode"/>
+        </div>
+    </div>
+    <span class="field-validation-error" data-bind="validationMessage: postalCode"></span>
+</div>

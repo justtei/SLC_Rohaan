@@ -1,0 +1,25 @@
+﻿@using MSLivingChoices.Localization
+@using System.Web.Mvc.Html
+@Model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.UserVm
+
+@if (User.Identity.IsAuthenticated)
+{
+    <ul>
+        <li>
+            @Html.Raw(string.Format(StaticContent.Login_HelloUsername, Model.FullName))
+        </li>
+        
+        <li>
+            <a href="http://bookorder.realestatebook.com/default.aspx?refer=SLC">@StaticContent.Lnk_OrderFreeBook</a> |
+            @Html.RouteLink(StaticContent.Login_iList, "iListDefault") |
+            @Html.ActionLink(StaticContent.Login_LogOff, "LogOff", "Account")
+        </li>
+    </ul>
+}
+else
+{
+    <div class="footer-row-item">
+        <a href="http://bookorder.realestatebook.com/default.aspx?refer=SLC">@StaticContent.Lnk_OrderFreeBook</a> |
+        @Html.ActionLink(StaticContent.Login_AdvertiserLogin, "LogIn", "Account")
+    </div>
+}

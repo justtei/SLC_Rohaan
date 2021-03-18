@@ -1,0 +1,29 @@
+﻿html{}
+
+@import '../variables.less';
+
+address, .address{
+    margin-bottom: 0;
+    font-style: normal;
+    color: @address-color;
+    font-weight: bold;
+
+    .address-line {
+        display: block;
+        text-transform: capitalize;
+        font-size: @font-size-h4;
+    }
+
+    .city {
+        text-transform: capitalize;
+
+        &:after {
+            content: ',';
+            white-space: nowrap;
+        }
+    }
+
+    .state {
+        text-transform: uppercase;
+    }
+}

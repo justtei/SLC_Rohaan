@@ -1,0 +1,46 @@
+﻿@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Admin.ViewModels
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model NewServiceProviderVm
+@{
+    ViewBag.Title = "New Service Provider";
+}
+@section scripts
+{
+    @Url.GoogleMapsApiScript()
+    <script type="text/javascript">
+        mslc.resolve(['lib/jQuery', 'admin/config', 'admin/editors/serviceProviderEditor'], function($, config, serviceProviderEditor) {
+            $(function() {
+                serviceProviderEditor.init(@Html.Json(Model), config.setting('addNewServiceProviderUrl'));
+            });
+        });
+    </script>
+}
+@section css
+{
+    @Url.Css("css/timepicker.css")
+    @Url.Css("themes/base/jquery.ui.core.css")
+    @Url.Css("themes/base/jquery.ui.theme.css")
+    @Url.Css("themes/base/jquery.ui.datepicker.css")
+    @Url.Css("themes/base/jquery.ui.slider.css")
+    @Url.Css("bootstrap/bootstrap-switch.css")
+    @Url.Css("jqueryFileUploader/jquery.fileupload-ui.css")
+    @Url.Css("jqueryCarousel/skin.css")
+    @Url.Css("imageUploader/ImageArea.css")
+    @Url.Css("imageUploader/Modal.css")
+    @Url.Css("css/reactSelectOverride.css")
+}
+<div class="form-title">
+    @StaticContent.Lbl_NewServiceProvider
+</div>
+<hr />
+@{ Html.RenderPartial("Partial/NewServiceProvider"); }
+<div class="submit-area">
+    <input type="button" class="btn btn-primary" value="@StaticContent.Btn_SaveAndSubmit" data-bind="click: submit" />
+</div>
+<div class="alert alert-block alert-error" data-bind="visible: !isValid()">
+    <ul  data-bind="foreach: errors">
+        <li data-bind="text: $data"></li>
+    </ul>
+</div>
+@{ Html.RenderPartial("Partial/_ImageSelectPopup", new UploadImageVm()); }

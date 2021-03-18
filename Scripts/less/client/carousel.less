@@ -1,0 +1,40 @@
+﻿html {
+}
+
+@import '../variables.less';
+
+.horizontal-carousel {
+    position: relative;
+    padding: 0 @grid-gutter-width;
+}
+
+.carousel-container {
+    overflow: hidden;
+
+    ul {
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .carousel > li {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: top;
+    }
+}
+
+.carousel-prev-button,
+.carousel-next-button {
+    position: absolute;
+    top: 45%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.carousel-prev-button {
+    left: 8px;
+}
+
+.carousel-next-button {
+    right: 8px;
+}

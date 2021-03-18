@@ -1,0 +1,31 @@
+﻿#goUpDownPanel
+{
+    position: fixed;
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+    top: 0;
+    text-align: center;
+    padding-top: 10px;
+    display: none;
+    z-index: 10;
+}
+
+#goUpDownPanel .arrow
+{
+    font-size: 20px;
+    font-family: tahoma;
+    font-weight: bold;
+    color: #4d7285;
+    opacity: 0.5;
+}
+
+#goUpDownPanel:hover
+{
+    background: #DFDFDF;
+}
+
+#goUpDownPanel:hover .arrow
+{
+    opacity: 1;
+}

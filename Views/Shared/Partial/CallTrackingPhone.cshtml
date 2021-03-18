@@ -1,0 +1,80 @@
+﻿@using MSLivingChoices.Localization
+<div class="content">
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.Type</label>
+            <span class="asterisk">*</span>
+        </div>
+        <div>
+            <select data-bind="options: phoneTypes, value: phoneType, optionsText: 'text', optionsValue: 'value',
+                validationElement: phoneType"></select>
+        </div>
+    </div>
+    <div class="inline-block" data-bind="if: provisionPhone()">
+        <div class="field-label">
+            <label>@DisplayNames.DisplayNumber</label>
+        </div>
+        <div>
+            <input type="text" readonly="readonly" data-bind="textInput: provisionPhone, validationElement: provisionPhone">
+        </div>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.ListingNumber</label>
+            <span class="asterisk">*</span>
+        </div>
+        <!-- ko with: listingPhone -->
+        @{ Html.RenderPartial("~/Views/Shared/Partial/PhoneNumber.cshtml"); }
+        <!--/ko -->
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.TargetNumber</label>
+            <span class="asterisk">*</span>
+        </div>
+        <!-- ko with: phone -->
+        @{ Html.RenderPartial("~/Views/Shared/Partial/PhoneNumber.cshtml"); }
+        <!--/ko -->
+    </div>
+    <br/>
+    <span class="field-validation-error" data-bind="validationMessage: listingPhone.number"></span>
+    <span class="field-validation-error" data-bind="validationMessage: phone.number"></span>
+    <div class="inline-block listing-number-note">
+        @StaticContent.Txt_ListingNumberNote
+    </div>
+    <div>
+        <div class="checkbox">
+            <label class="inline-block">
+                <input type="checkbox" data-bind="checked: isWhisper">
+                <span>@DisplayNames.Whisper</span>
+            </label>
+        </div>
+        <div class="checkbox">
+            <label class="inline-block">
+                <input type="checkbox" data-bind="checked: isCallReview">
+                <span>@DisplayNames.CallRecord</span>
+            </label>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.StartDate</label>
+                <span class="asterisk">*</span>
+            </div>
+            <div>
+                <input type="text" data-bind="datepicker: startDate, validationElement: startDate">
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.EndDate</label>
+                <span class="asterisk">*</span>
+            </div>
+            <div>
+                <input type="text" data-bind="datepicker: endDate, validationElement: endDate">
+            </div>
+        </div>
+        <div>
+            <span class="field-validation-error" data-bind="validationMessage: startDate"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿html {
+}
+
+@import '../variables.less';
+
+.print {
+    margin: 0 auto;
+    width: 960px;
+    color: @black;
+
+    .page {
+        page-break-before: always;
+    }
+
+    .avoid-break {
+        page-break-inside: avoid;
+    }
+
+    .primary-photo img {
+        width: 100%;
+    }
+
+    .coupon {
+        border: none!important;
+    }
+
+    .map .tab-pane {
+        height: 750px;
+    }
+
+    .direction {
+        width: 100%;
+
+        .steps {
+            height: auto;
+            margin-top: 0px;
+        }
+    }
+}

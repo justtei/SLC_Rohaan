@@ -1,0 +1,196 @@
+﻿/*common styles*/
+body
+{
+    font-family: arial, helvetica, sans-serif;
+    font-size: 17px;
+    color: #1A1A1A;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px 40px;
+    width: 960px;
+}
+figure
+{
+    width: 420px;
+    height: 315px;
+    margin-left: 0;
+}
+p
+{
+    margin-top: 0;
+}
+/*header*/
+.office-header
+{
+    padding-top: 30px;
+    margin-bottom: 0;
+}
+.community-info
+{
+    margin-top: 50px;
+    border-left: 5px solid #003F7A;
+    position: relative;
+}
+.community
+{
+    width: 220px;
+    float: left;
+    margin-left: 20px;
+}
+.community-name
+{
+    font-size: 19px;
+    font-weight: bold;
+    color: #003F7A;
+}
+.community-phone
+{
+    font-size: 18px;
+    font-weight: bold;
+}
+.office-hours
+{
+    border-left: 1px solid #000;
+    padding-left: 20px;
+    width: 280px;
+    float: left;
+}
+.qr
+{
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.qr-code
+{
+    float: right;
+    margin-bottom: -10px;
+}
+.qr-description
+{
+    width: 275px;
+    position: absolute;
+    bottom: 0;
+}
+/*content*/
+
+.content
+{
+    padding: 25px 0;
+    margin: 25px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.row:before, .row:after
+{
+    display: table;
+    line-height: 0;
+    content: "";
+    clear: both;
+}
+
+/*footer*/
+.easy-print-text
+{
+    font-weight: bold;
+}
+
+/*coupon details*/
+.coupon-details
+{
+    border: 3px dashed #D0D0D0;
+    padding: 6px 10px;
+}
+
+.coupon-title
+{
+    margin-top: 0;
+    margin-bottom: 7px;
+}
+
+.coupon-expiration-date
+{
+    margin-top: 7px;
+    margin-bottom: 0;
+}
+
+.amenities ul, .services ul
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.amenities li, .services li
+{
+    width: 31%;
+    word-wrap: break-word;
+    display: inline-block;
+    padding: 0 1%;
+}
+
+/*direction*/
+
+#directions
+{
+    width: 540px;
+    float: left;
+}
+#maps
+{
+    width: 420px;
+    float: left;
+}
+.route-info
+{
+    margin-bottom: 20px;
+}
+.point
+{
+    font-size: 24px;
+    color: #154278;
+    margin: 5px;
+    font-weight: bold;
+}
+.steps
+{
+    margin: 10px 0 10px 20px;
+}
+.instruction
+{
+    padding: 10px;
+}
+.maneuver-icon img
+{
+    width: 25px;
+}
+.point-address
+{
+    background: rgb(227, 236, 240);
+    width: 410px;
+    padding: 5px;
+}
+.point-marker
+{
+    font-weight: bold;
+}
+.distance
+{
+    font-size: 15px;
+}
+#overlay
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: black;
+    background-image: url(../images/featured_property_loader_overlay.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    left: 0;
+    top: 0;
+}

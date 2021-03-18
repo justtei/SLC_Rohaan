@@ -1,0 +1,64 @@
+﻿#fancybox-outer #fancybox-bg-n.fancybox-bg {
+    border-bottom: 1px solid #cdd9e5;
+    border-top-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -webkit-border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -webkit-border-top-right-radius: 4px;
+    background: #003f7a;
+    color: #ffffff;
+}
+
+#fancybox-title.fancybox-title-float {
+    top: 2px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#fancybox-close {
+    background-position: 0px;
+    background-image: url(../images/close-dialog.png);
+    width: 10px;
+    height: 10px;
+    right: 5px;
+    top: -15px;
+}
+
+#fancybox-loading {
+    background-color: rgb(0, 0, 0);
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+#fancybox-loading div 
+{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 60px;
+    height: 60px;
+    top: 0px !important;
+    background: url(../images/featured_property_loader_overlay.gif) no-repeat;
+}
+
+#fancybox-left .fancy-ico,
+#fancybox-right .fancy-ico {
+    width: 35px;
+    height: 35px;
+    background-position: 65px, 0px;
+}
+
+#fancybox-left #fancybox-left-ico {
+    background-image: url(../jqueryCarousel/prev-horizontal.png);
+}
+
+#fancybox-right #fancybox-right-ico{
+    background-image: url(../jqueryCarousel/next-horizontal.png);
+}

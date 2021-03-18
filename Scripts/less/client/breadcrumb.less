@@ -1,0 +1,21 @@
+﻿html {
+}
+
+@import '../variables.less';
+
+.breadcrumb {
+    list-style: none;
+    margin-top: 5px;
+    margin-bottom: 0;
+
+    > li {
+        margin-right: 1px;
+        display: inline-block;
+
+        + li:before {
+            padding: 0 @breadcrumb-padding;
+            color: @link-color;
+            content: @breadcrumb-delimiter;
+        }
+    }
+}

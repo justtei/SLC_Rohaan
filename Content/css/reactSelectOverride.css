@@ -1,0 +1,10 @@
+﻿/* Override input styling from bootstrap */
+input#react-select-2-input {
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+/* bootstrap adds a 9px bottom margin to inputs.. add it back to the row div */
+.rowSpaced { 
+    margin-bottom: 9px;
+}

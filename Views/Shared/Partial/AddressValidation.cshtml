@@ -1,0 +1,52 @@
+﻿@using MSLivingChoices.Localization
+<div class="input-validation-error" data-bind="with: addressValidation">
+    <div class="mapWrapper">
+        <div class="row-fluid">
+            <div class="span6">
+                <p><strong>@StaticContent.Lbl_VerifyAddress</strong></p>
+                <p data-bind="if: isAddressValid">@ErrorMessages.VerifiedAddress</p>
+                <p data-bind="if: !isAddressValid">@ErrorMessages.UnverifiedAddress</p>
+                <ul class="inline unstyled" id="address-validation-list" data-bind="foreach: validationItems">
+                    <li>
+                        <label class="radio inline">
+                            <input type="radio" name="validation-item" data-bind="checked: $parent.selectedValidationItem, attr: {value: id}"/>
+                            <address>
+                                <strong data-bind="text: '@DisplayNames.Address ' + ($index() + 1)"></strong>
+                                <br>
+                                <div>
+                                    <input type="text" data-bind="textInput: addressLine1,
+                                        click: function () { return $parent.checkValidationItem($index()) },
+                                        hasFocus: $parent.selectedValidationItem() === parseInt($index())"/>
+                                </div>
+                                <span data-bind="text: addressLine2"></span>
+                                <br>
+                            </address>
+                        </label>
+                    </li>
+                </ul>
+                <div class="span5">
+                    <div class="field-label">
+                        <label>
+                            @DisplayNames.Latitude
+                        </label>
+                        <span class="asterisk">*</span>
+                    </div>
+                    <input type="text" data-bind="value: googleMap.latitude"/>
+                </div>
+                <div class="span5 offset1">
+                    <div class="field-label">
+                        <label>
+                            @DisplayNames.Longitude
+                        </label>
+                        <span class="asterisk">*</span>
+                    </div>
+                    <input type="text" data-bind="value: googleMap.longitude"/>
+                </div>
+            </div>
+            <div class="span5">
+                <div class="map" id="googleMap">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

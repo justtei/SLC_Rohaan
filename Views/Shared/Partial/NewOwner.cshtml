@@ -1,0 +1,92 @@
+﻿@model string
+@using MSLivingChoices.Localization
+<!-- ko with: @Model -->
+<div class="field-label">
+    <label>@DisplayNames.Name</label>
+    <span class="asterisk">*</span>
+</div>
+<div>
+    <input type="text" data-bind="textInput: name, validationElement: name">
+    <span class="field-validation-error" data-bind="validationMessage: name"></span>
+</div>
+@{ Html.RenderPartial("Partial/Address"); }
+@{ Html.RenderPartial("Partial/PhoneList"); }
+@{ Html.RenderPartial("Partial/EmailList"); }
+<div>
+    <span class="btn btn-small btn-info" data-bind="click: addContact">
+        @StaticContent.WtrMrk_AddContact
+    </span>
+    <!-- ko foreach: contacts -->
+    <div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.ContactType</label>
+            </div>
+            <div>
+                <select data-bind="options: contactTypes, value: contactTypeId, optionsText: 'text', optionsValue: 'value'"></select>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.ContactFirstName</label>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: firstName, validationElement: firstName"/>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.ContactLastName</label>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: lastName, validationElement: lastName"/>
+            </div>
+        </div>
+        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.contacts().length > 1, click: $parent.deleteContact">
+            @StaticContent.Btn_Delete
+        </span>
+        <span class="field-validation-error" data-bind="validationMessage: firstName"></span>
+        <br/>
+        <span class="field-validation-error" data-bind="validationMessage: lastName"></span>
+    </div>
+    <!-- /ko -->
+</div>
+@{ Html.RenderPartial("Partial/ImageList", "logoImages"); }
+<div class="field-label">
+    <label>@DisplayNames.WebsiteAddress</label>
+</div>
+<div>
+    <input type="text" data-bind="textInput: websiteUrl, validationElement: websiteUrl"/>
+    <span class="field-validation-error" data-bind="validationMessage: websiteUrl"></span>
+</div>
+<div>
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: displayName"/>
+        <span>@DisplayNames.DisplayName</span>
+    </label>
+</div>
+<div>
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: displayAddress"/>
+        <span>@DisplayNames.DisplayStreetAddress</span>
+    </label>
+</div>
+<div>
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: displayPhone"/>
+        <span>@DisplayNames.DisplayPhone</span>
+    </label>
+</div>
+<div>
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: displayLogo"/>
+        <span>@DisplayNames.DisplayLogo</span>
+    </label>
+</div>
+<div>
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: displayWebsiteUrl"/>
+        <span>@DisplayNames.DisplayWebsiteAddressOnline</span>
+    </label>
+</div>
+<!-- /ko -->

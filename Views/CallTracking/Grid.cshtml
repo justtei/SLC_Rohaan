@@ -1,0 +1,100 @@
+﻿@using System.Web.Script.Serialization
+@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.GridVm<MSLivingChoices.Mvc.Uipc.Admin.ViewModels.CallTrackingPhoneForGridVm>
+@{
+    ViewBag.Title = "Call Tracking Grid";
+}
+@section scripts
+{
+    @Url.Script("legacy/jquery/jquery-ui-1.9.2.min.js")
+    @Url.Script("legacy/jquery/jquery.validate.min.js")
+    @Url.Script("legacy/jquery/jquery.validate.unobtrusive.min.js")
+    @Url.Script("legacy/knockout/knockout-2.2.0.js")
+    @Url.Script("legacy/custom/datepicker.js")
+    @Url.Script("legacy/custom/grids/grid.js")
+    @Url.Script("legacy/custom/grids/callTrackingGrid.js")
+    <script type="text/javascript">
+        $(function() { initializeCallTrackingGrid(@Html.Raw(new JavaScriptSerializer().Serialize(Model))); });
+    </script>
+}
+@section css
+{
+    @Url.Css("themes/base/jquery.ui.core.css")
+    @Url.Css("themes/base/jquery.ui.theme.css")
+    @Url.Css("themes/base/jquery.ui.dialog.css")
+    @Url.Css("css/grid.css")
+}
+@{ Html.RenderPartial("Partial/_AjaxServerError"); }
+<div id="validateCallTrackingPhoneButton">
+    @Html.ActionLink("Validate Call Tracking", "ValidateCallTrackingPhones", "CallTracking", null, new { @class = "btn btn-small" })
+</div>
+<table class="grid" id="callTrackingGrid">
+    <thead>
+        <tr>
+            <th>
+                @DisplayNames.Listing
+            </th>
+            <th>
+                @DisplayNames.Type
+            </th>
+            <th>
+                @DisplayNames.ProvisionNumber
+            </th>
+            <th>
+                @DisplayNames.TargetNumber
+            </th>
+            <th>
+                @DisplayNames.Whisper
+            </th>
+            <th>
+                @DisplayNames.CallRecord
+            </th>
+            <th>
+                @DisplayNames.StartDate
+            </th>
+            <th>
+                @DisplayNames.EndDate
+            </th>
+            <th>
+                @DisplayNames.Status
+            </th>
+            <th>
+                @DisplayNames.DisconnectDate
+            </th>
+            <th>
+                @DisplayNames.ExpiresDate
+            </th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: list">
+        <tr>
+            <td>
+                <a data-bind="text: communityName, attr: { href: '@Url.Action("Details")' + '?id=' + communityId }, click: $root.showOverlay" title="@StaticContent.Tlt_EditCallTracking"></a>
+            </td>
+            <td data-bind="text: phoneType" class="not-editable">
+            </td>
+            <td data-bind="text: provisionPhone" class="not-editable">
+            </td>
+            <td data-bind="text: phone" class="not-editable">
+            </td>
+            <td>
+                <input type="checkbox" data-bind="checked: isWhisper" disabled="disabled" />
+            </td>
+            <td>
+                <input type="checkbox" data-bind="checked: isCallReview" disabled="disabled" />
+            </td>
+            <td data-bind="text: startDate" class="not-editable">
+            </td>
+            <td data-bind="text: endDate" class="not-editable">
+            </td>
+            <td data-bind="text: status" class="not-editable">
+            </td>
+            <td data-bind="text: disconnectDate" class="not-editable">
+            </td>
+            <td data-bind="text: expiresDate" class="not-editable">
+            </td>
+        </tr>
+    </tbody>
+</table>
+@{ Html.RenderPartial("Partial/_Paging", Model); }

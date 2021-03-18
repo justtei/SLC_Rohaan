@@ -1,0 +1,225 @@
+﻿@using MSLivingChoices.Localization
+<div class="field-label">
+    <label>@StaticContent.Lbl_Package</label>
+    <span class="asterisk">*</span>
+</div>
+<div>
+    <select data-bind="options: packages, value: package, optionsText: 'text', optionsValue: 'value',
+    validationElement: package, disable: true, optionsCaption: '@StaticContent.WtrMrk_Select    '">
+    </select>
+</div>
+<div class="field-label">
+    <label>@DisplayNames.Book</label>
+    <span class="asterisk">*</span>
+</div>
+<div>
+    <select data-bind="options: books, value: bookId, optionsText: 'text', optionsValue: 'value',
+    validationElement: bookId, optionsCaption: '@StaticContent.WtrMrk_Select    '">
+    </select>
+</div>
+<div>
+    <div class="field-label">
+        <label>@DisplayNames.ServiceCategories</label>
+        <span class="asterisk">*</span>
+    </div>
+    <div id="serviceProviderCategories" class="checkbox-list" data-bind="foreach: serviceCategories, validationElement: serviceCategories">
+        <div class="service-provider-category">
+            @{ Html.RenderPartial("Partial/Checkbox"); }
+        </div>
+    </div>
+    <div class="checkbox-list-error-message">
+        <span class="field-validation-error" data-bind="validationMessage: serviceCategories"></span>
+    </div>
+</div>
+<div class="field-label">
+    <label>@DisplayNames.Name</label>
+    <span class="asterisk">*</span>
+</div>
+<div>
+    <input type="text" data-bind="textInput: name, validationElement: name" />
+    <span class="field-validation-error" data-bind="validationMessage: name"></span>
+</div>
+@{ Html.RenderPartial("Partial/Address"); }
+<div class="checkbox inline-block">
+    <label>
+        <input type="checkbox" data-bind="checked: doNotDisplayAddress" />
+        <span>@DisplayNames.DoNotDisplayAddressOnline</span>
+    </label>
+</div>
+<div class="rowSpaced">
+    <div class="field-label">
+        <label>@DisplayNames.CountiesServed</label>
+    </div>
+    <div id="countiesServed"></div>
+</div>
+@{ Html.RenderPartial("Partial/PhoneList"); }
+@{ Html.RenderPartial("Partial/EmailList"); }
+<div>
+    <span class="btn btn-small btn-info" data-bind="click: addContact">
+        @StaticContent.WtrMrk_AddContact
+    </span>
+    <!-- ko foreach: contacts -->
+    <div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.ContactType</label>
+            </div>
+            <div>
+                <select data-bind="options: contactTypes, value: contactTypeId, optionsText: 'text', optionsValue: 'value'"></select>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.ContactFirstName</label>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: firstName, validationElement: firstName" />
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.ContactLastName</label>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: lastName, validationElement: lastName" />
+            </div>
+        </div>
+        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.contacts().length > 1, click: $parent.deleteContact">
+            @StaticContent.Btn_Delete
+        </span>
+        <span class="field-validation-error" data-bind="validationMessage: firstName"></span>
+        <br/>
+        <span class="field-validation-error" data-bind="validationMessage: lastName"></span>
+    </div>
+    <!-- /ko -->
+</div>
+<div id="officeHours">
+    <div class="field-label">
+        <label>@DisplayNames.OfficeHours</label>
+        <span id="addOfficeHours" class="btn btn-small btn-info" data-bind="click: addOfficeHours">
+            @StaticContent.WtrMrk_AddOfficeHours
+        </span>
+    </div>
+    <!-- ko foreach: officeHours -->
+    <div class="office-hours">
+        @{ Html.RenderPartial("Partial/OfficeHours"); }
+        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.officeHours().length > 1, click: $parent.deleteOfficeHours">
+            @StaticContent.Btn_Delete
+        </span>
+        <span class="field-validation-error" data-bind="validationMessage: startDay"></span>
+        <br/>
+        <span class="field-validation-error" data-bind="validationMessage: note"></span>
+    </div>
+    <!-- /ko -->
+</div>
+<div class="field-label">
+    <label>@StaticContent.Lbl_Description</label>
+</div>
+<div>
+    <textarea data-bind="textInput: description"></textarea>
+</div>
+<div class="field-label">
+    <label>@DisplayNames.WebsiteAddress</label>
+</div>
+<div>
+    <input type="text" data-bind="textInput: websiteUrl, validationElement: websiteUrl" />
+    <span class="field-validation-error" data-bind="validationMessage: websiteUrl"></span>
+</div>
+<div class="checkbox inline-block">
+    <label>
+        <input type="checkbox" data-bind="checked: displayWebsiteUrl" />
+        <span>@DisplayNames.DisplayWebsiteAddressOnline</span>
+    </label>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/ImageList", "images"); }
+</div>
+<span class="field-validation-error" data-bind="text: callTrackingWarning"></span>
+<div class="call-tracking-phones" data-bind="css: {disable: !isPublished()}">
+    <label class="checkbox inline-block">
+        <input type="checkbox" data-bind="checked: provisionCallTrackingNumbers" />
+        <span>@DisplayNames.ProvisionCallTrackingNumbers</span>
+    </label>
+    <div data-bind="slideVisible: provisionCallTrackingNumbers">
+        <span class="btn btn-small btn-info" data-bind="click: addCallTrackingPhone">
+            @StaticContent.WtrMark_AddCallTrackingPhone
+        </span>
+        <!-- ko foreach: callTrackingPhones -->
+        <div class="call-tracking-phone">
+            @{ Html.RenderPartial("Partial/CallTrackingPhone"); }
+            <!-- ko if: !provisionPhone() && $parent.callTrackingPhones().length > 1 -->
+            <span class="btn btn-mini btn-danger delete-call-tracking-phone" data-bind="click: $parent.deleteCallTrackingPhone">
+                @StaticContent.Btn_Delete
+            </span>
+            <!-- /ko -->
+            <div class="call-tracking-resume-area"
+                data-bind="if: provisionPhone()">
+                <span class="btn btn-mini btn-warning "
+                    data-bind="visible: !isDisconnected(), click: $parent.disconnectCallTrackingPhone">
+                    @StaticContent.Btn_Disconnect
+                </span>
+                <span class="btn btn-mini btn-success"
+                    data-bind="visible: isDisconnected(), click: $parent.resumeCallTrackingPhone">
+                    @StaticContent.Btn_Resume
+                </span>
+                <div class="expires-info" data-bind="visible: isDisconnected(), text: resumeInfo"></div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+@*Hidden until business rules won't change*@
+@*<div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.FeatureStartDate</label>
+        </div>
+        <div>
+            <input type="text" data-bind="datepicker: featureStartDate, validationElement: featureStartDate"/>
+        </div>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.FeatureEndDate</label>
+        </div>
+        <div>
+            <input type="text" data-bind="datepicker: featureEndDate"/>
+        </div>
+    </div>
+    <div>
+        <span class="field-validation-error" data-bind="validationMessage: featureStartDate"></span>
+    </div>
+</div>*@
+<div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.PublishStartDate</label>
+        </div>
+        <div>
+            <input type="text" data-bind="datepicker: publishStartDate, validationElement: publishStartDate" />
+        </div>
+    </div>
+    <div class="inline-block">
+        <div class="field-label">
+            <label>@DisplayNames.PublishEndDate</label>
+        </div>
+        <div>
+            <input type="text" data-bind="datepicker: publishEndDate" />
+        </div>
+    </div>
+    <div>
+        <span class="field-validation-error" data-bind="validationMessage: publishStartDate"></span>
+    </div>
+</div>
+@{ Html.RenderPartial("Partial/Coupon"); }
+<div>
+    <label>@StaticContent.Lbl_PaymentsAccepted</label>
+</div>
+<div class="checkbox-list" data-bind="foreach: paymentTypes">
+    <div>
+        @{ Html.RenderPartial("Partial/Checkbox"); }
+    </div>
+</div>
+<div data-bind="visible: addressValidation.validationItems().length">
+    @{ Html.RenderPartial("Partial/AddressValidation"); }
+</div>

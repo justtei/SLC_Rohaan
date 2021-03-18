@@ -1,0 +1,28 @@
+﻿html {
+}
+
+@import '../variables.less';
+
+.content {
+    padding-bottom: @footer-height;
+}
+
+footer {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    border-top: @footer-border-width solid @footer-border-color;
+    background-color: @footer-bg-color;
+    color: @footer-color;
+
+    a {
+        color: @footer-link-color;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        &:hover {
+            color: @footer-link-hover-color;
+            text-decoration: underline;
+        }
+    }
+}

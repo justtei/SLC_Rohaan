@@ -1,0 +1,462 @@
+﻿@using System.Web.Script.Serialization
+@using MSLivingChoices.Entities.Admin.Enums
+@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@{
+    ViewBag.Title = "Community Grid";
+}
+@section css
+{
+    @Url.Css("themes/base/jquery.ui.core.css")
+    @Url.Css("themes/base/jquery.ui.theme.css")
+    @Url.Css("themes/base/jquery.ui.datepicker.css")
+    @Url.Css("themes/base/jquery.ui.dialog.css")
+    @Url.Css("css/grid.css")
+}
+@section scripts
+{
+    @Url.Script("legacy/jquery/jquery-ui-1.9.2.min.js")
+    @Url.Script("legacy/jquery/jquery.validate.min.js")
+    @Url.Script("legacy/jquery/jquery.validate.unobtrusive.min.js")
+    @Url.Script("legacy/knockout/knockout-2.2.0.js")
+    @Url.Script("legacy/custom/grids/grid.js")
+    @Url.Script("legacy/custom/grids/editableGrid.js")
+    @Url.Script("legacy/custom/grids/communityGrid.js")
+    @Url.Script("legacy/custom/datepicker.js")
+<script type="text/javascript">
+        $(function () {
+                        @{var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    serializer.MaxJsonLength = Int32.MaxValue;
+    var jsonModel = serializer.Serialize(Model);
+        });
+        console.log(@ViewBag.GL);
+</script>
+}
+
+    <div id="communityGridContainer">
+        @*@{ Html.RenderPartial("Partial/_AjaxServerError"); }*@
+        <script>console.log("36 Ran");</script>
+        <div id="dialogConfirm" title="@StaticContent.Tlt_DeleteCommunityQuestion" class="display-none">
+            <span class="ui-icon ui-icon-alert"></span>
+            <span class="message">
+                <script>console.log("40 Ran");</script>
+                @StaticContent.Lbl_Community
+                <span class="delete-community-name"></span>
+                <script>console.log("43 Ran");</script>
+                @StaticContent.Info_WillBeDeleted
+            </span>
+        </div>
+        <table id="communityGrid" class="grid editable-grid">
+            <thead>
+                <tr>
+                    <th>
+                        <span id="communityNameHeader" class="header">
+                            <script>console.log("52 Ran");</script>
+                            <span data-bind="click: sortByCommunityName" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <script>console.log("55 Ran");</script>
+                                <span>@StaticContent.Lbl_Community</span>
+                                <script>console.log("56 Ran");</script>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.Community    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <script>console.log("60 Ran");</script>
+                            <span data-bind="click: toggleCommunityNameFilter, css: { applied: filter.community }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: communityNameFilterIsVisible" class="filter">
+                                <script>console.log("65 Ran");</script>
+                                <span>@StaticContent.Lbl_CommunityName</span>
+                                <input type="text" data-bind="value: filter.communityOption, event: { keydown: communityNameFilterOnKeyDown }" />
+                                <script>console.log("68 Ran");</script>
+                                <input type="button" data-bind="click: clearCommunityNameFilter, enable: filter.community" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyCommunityNameFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="bookNumberHeader" class="header">
+                            <script>console.log("76 Ran");</script>
+                            <span data-bind="click: sortByBookNumber" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <script>console.log("78 Ran");</script>
+                                <span>@StaticContent.Lbl_BookNumber</span>
+                                <script>console.log("80 Ran");</script>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.BookNumber    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="packageHeader" class="header">
+                            <span data-bind="click: sortByPackage" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@StaticContent.Lbl_Package</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.Package    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleCommunityPackageFilter, css: { applied: packageFilterIsApplied }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: communityPackageFilterIsVisible" class="filter">
+                                <!-- ko foreach: filter.selectedFilterPackages -->
+                                <label class="checkbox">
+                                    <input type="checkbox" data-bind="checked: isChecked" />
+                                    <!-- ko text: text -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearCommunityPackageFilter, enable: packageFilterIsApplied" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyCommunityPackageFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="header listing-type-header">
+                            <span data-bind="click: sortByActiveAdultCommunities" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@StaticContent.Lbl_AAC</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.AAC    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleActiveAdultCommunitiesFilter, css: { applied: aacFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: activeAdultCommunitiesFilterIsVisible" class="filter">
+                                <!-- ko foreach: checkboxFilterOptions -->
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $root.filter.aacOption" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearAACFilter, enable: aacFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyAACFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="header listing-type-header">
+                            <span data-bind="click: sortByActiveAdultHomes" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@StaticContent.Lbl_AAH</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.AAH    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleActiveAdultHomesFilter, css: { applied: aahFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: activeAdultHomesFilterIsVisible" class="filter">
+                                <!-- ko foreach: checkboxFilterOptions -->
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $root.filter.aahOption" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearAAHFilter, enable: aahFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyAAHFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="header listing-type-header">
+                            <span data-bind="click: sortBySeniorHousingAndCare" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@StaticContent.Lbl_SHC</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.SHC    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: toggleSeniorHousingAndCareFilter, css: { applied: shcFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: seniorHousingAndCareFilterIsVisible" class="filter">
+                                <!-- ko foreach: checkboxFilterOptions -->
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $root.filter.shcOption" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearSHCFilter, enable: shcFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applySHCFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="categoriesHeader" class="header">
+                            <span class="header-title">@StaticContent.Lbl_SHCSubCategories</span>
+                            <span data-bind="click: toggleCategoriesFilter, css: { applied: categoryFilterIsApplied }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: categoriesFilterIsVisible" class="filter">
+                                <!-- ko foreach: filter.selectedFilterCategories -->
+                                <label class="checkbox">
+                                    <input type="checkbox" data-bind="checked: isChecked" />
+                                    <!-- ko text: text -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearCategoriesFilter, enable:  categoryFilterIsApplied" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyCategoriesFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    @*NOTE: Hidden until business rules won't change*@
+                    @*<th>
+                            <span id="showcaseHeader" class="header">
+                                <span class="header-title" data-bind="click: sortByShowcase" title="@StaticContent.Tlt_Sort">
+                                    <span>@StaticContent.Lbl_Showcase</span>
+                                    <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.Showcase', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon"></span>
+                                </span>
+                                <span data-bind="click: toggleShowcaseFilter, css: { applied: showcaseFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                    <span class="filter-icon"></span>
+                                </span>
+                                <div data-bind="slideVisible: showcaseFilterIsVisible" class="filter">
+                                    <!-- ko foreach: checkboxFilterOptions -->
+                                    <label class="radio">
+                                        <input type="radio" data-bind="value: $data, checked: $root.filter.showcaseOption" />
+                                        <!-- ko text: $data -->
+                                        <!-- /ko -->
+                                    </label>
+                                    <!-- /ko -->
+                                    <input type="button" data-bind="click: clearShowcaseFilter, enable: showcaseFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                    <input type="button" data-bind="click: applyShowcaseFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                                </div>
+                            </span>
+                        </th>
+                        <th>
+                            <span id="showcaseStartDateHeader" class="header">
+                                <span data-bind="click: sortByShowcaseStartDate" class="header-title" title="@StaticContent.Tlt_Sort">
+                                    <span>@DisplayNames.ShowcaseStart</span>
+                                    <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.ShowcaseStart', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon"></span>
+                                </span>
+                                <span data-bind="click: toggleShowcaseStartFilter, css: { applied: filter.showcaseStart }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                    <span class="filter-icon"></span>
+                                </span>
+                                <div data-bind="slideVisible: showcaseStartFilterIsVisible" class="filter">
+                                    <span>From:</span>
+                                    <input type="text" data-bind="value: filter.showcaseStartOption" class="date-picker" />
+                                    <input type="button" data-bind="click: clearShowcaseStartFilter, enable: filter.showcaseStart" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                    <input type="button" data-bind="click: applyShowcaseStartFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                                </div>
+                            </span>
+                        </th>
+                        <th>
+                            <span id="showcaseEndDateHeader" class="header">
+                                <span data-bind="click: sortByShowcaseEndDate" class="header-title" title="@StaticContent.Tlt_Sort">
+                                    <span>@DisplayNames.ShowcaseEnd</span>
+                                    <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.ShowcaseEnd', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon"></span>
+                                </span>
+                                <span data-bind="click: toggleShowcaseEndFilter, css: { applied: filter.showcaseEnd }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                    <span class="filter-icon"></span>
+                                </span>
+                                <div data-bind="slideVisible: showcaseEndFilterIsVisible" class="filter">
+                                    <span>To:</span>
+                                    <input type="text" data-bind="value: filter.showcaseEndOption" class="date-picker" />
+                                    <input type="button" data-bind="click: clearShowcaseEndFilter, enable: filter.showcaseEnd" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                    <input type="button" data-bind="click: applyShowcaseEndFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                                </div>
+                            </span>
+                        </th>*@
+                    <th>
+                        <span id="publishHeader" class="header">
+                            <span data-bind="click: sortByPublish" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@StaticContent.Lbl_Publish</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.Publish    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: togglePublishFilter, css: { applied: publishFilterIsApplied() }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: publishFilterIsVisible" class="filter">
+                                <!-- ko foreach: checkboxFilterOptions -->
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $root.filter.publishOption" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                                <!-- /ko -->
+                                <input type="button" data-bind="click: clearPublishFilter, enable: publishFilterIsApplied()" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyPublishFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="publishStartDateHeader" class="header">
+                            <span data-bind="click: sortByPublishStartDate" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@DisplayNames.PublishStart</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.PublishStart    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: togglePublishStartFilter, css: { applied: filter.publishStart }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: publishStartFilterIsVisible" class="filter">
+                                <span>From:</span>
+                                <input type="text" data-bind="value: filter.publishStartOption" class="date-picker" />
+                                <input type="button" data-bind="click: clearPublishStartFilter, enable: filter.publishStart" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyPublishStartFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    <th>
+                        <span id="publishEndDateHeader" class="header">
+                            <span data-bind="click: sortByPublishEndDate" class="header-title" title="@StaticContent.Tlt_Sort">
+                                <span>@DisplayNames.PublishEnd</span>
+                                <span data-bind="visible: sortBy() == '@CommunityGridSortByOption.PublishEnd    ', css: { 'desc-icon': 'Desc' == orderBy() }" class="sort-icon">
+                                </span>
+                            </span>
+                            <span data-bind="click: togglePublishEndFilter, css: { applied: filter.publishEnd }" class="filter-icon-wrapper" title="@StaticContent.Tlt_Filter">
+                                <span class="filter-icon"></span>
+                            </span>
+                            <div data-bind="slideVisible: publishEndFilterIsVisible" class="filter">
+                                <span>To:</span>
+                                <input type="text" data-bind="value: filter.publishEndOption" class="date-picker" />
+                                <input type="button" data-bind="click: clearPublishEndFilter, enable: filter.publishEnd" value="@StaticContent.Btn_Clear" class="btn btn-mini" />
+                                <input type="button" data-bind="click: applyPublishEndFilter" value="@StaticContent.Tlt_Filter" class="btn btn-mini filter-button" />
+                            </div>
+                        </span>
+                    </th>
+                    @* 'Delete' button column header *@
+                    @if (Model.IsAdmin)
+                    {
+                        <th></th>
+                    }
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: list">
+                <tr>
+                    <td class="community-name-column">
+                        <input type="hidden" data-bind="value: id" />
+                        <a data-bind="text: communityName, attr: { href: '@Url.Action("Edit")' + '?id=' + id }, click: $root.showOverlay" title="@StaticContent.Ttl_EditCommunity">
+                        </a>
+                    </td>
+                    <td data-bind="text: bookNumber" class="book-number not-editable"></td>
+                    <td>
+                        <span data-bind="text: package, click: $root.showPackageSelector" class="cursor-pointer"></span>
+                        <div data-bind="fadeVisible: packageSelectorIsVisible" class="dialog">
+                            <div class="dialog-title">
+                                <span class="dialog-title-text">@StaticContent.Lbl_Package</span>
+                                <img data-bind="click: $root.closePackageSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                            </div>
+                            <div data-bind="foreach: packages" class="dialog-content">
+                                <label class="radio">
+                                    <input type="radio" data-bind="value: $data, checked: $parent.selectedPackage" />
+                                    <!-- ko text: $data -->
+                                    <!-- /ko -->
+                                </label>
+                            </div>
+                            <div data-bind="click: $root.changePackage" class="dialog-save-button">
+                                <input type="button" data-bind="disable: isDisabled" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                            </div>
+                        </div>
+                    </td>
+                    <td class="active-adult-communities">
+                        <input type="checkbox" data-bind="checked: ActiveAdultCommunities, click: $root.changeActiveAdultCommunities" />
+                    </td>
+                    <td class="active-adult-homes">
+                        <input type="checkbox" data-bind="checked: ActiveAdultHomes, click: $root.changeActiveAdultHomes" />
+                    </td>
+                    <td class="senior-housing-and-care">
+                        <input type="checkbox" data-bind="checked: SeniorHousingAndCare, click: $root.changeSeniorHousingAndCare" />
+                    </td>
+                    <td class="senior-housing-and-care-categories">
+                        <span data-bind="text: categories, visible: SeniorHousingAndCare, click: $root.showCategoriesSelector" class="cursor-pointer">
+                        </span>
+                        <div data-bind="fadeVisible: categoriesSelectorIsVisible" class="dialog">
+                            <div class="dialog-title">
+                                <span class="dialog-title-text">@DisplayNames.SHCCategories</span>
+                                <img data-bind="click: $root.closeCategoriesSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                            </div>
+                            <div data-bind="foreach: selectedCategories" class="dialog-content">
+                                <div>
+                                    <label class="checkbox">
+                                        <input type="checkbox" data-bind="checked: isChecked" />
+                                        <!-- ko text: text -->
+                                        <!-- /ko -->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="dialog-save-button">
+                                <input type="button" data-bind="click: $root.updateCategories, enable: categoriesSelectorIsValid() && !isDisabled()" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                            </div>
+                        </div>
+                    </td>
+                    @*NOTE: Hidden until business rules won't change*@
+                    @*<td class="showcase">
+                            <input type="checkbox" data-bind="checked: showcase, click: $root.changeShowcase" />
+                        </td>
+                        <td class="date">
+                            <span data-bind="text: showcaseStartDate, click: $root.showShowcaseDatesSelector" class="cursor-pointer"></span>
+                            <div data-bind="fadeVisible: showcaseDatesSelectorIsVisible" class="dialog">
+                                <div class="dialog-title">
+                                    <span class="dialog-title-text">@StaticContent.Lbl_ShowcaseDates</span>
+                                    <img data-bind="click: $root.closeShowcaseDatesSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                                </div>
+                                <div class="dialog-content">
+                                    <div class="title">
+                                        @DisplayNames.ShowcaseStart
+                                        <span class="asterisk">*</span>
+                                    </div>
+                                    <div>
+                                        <input type="text" data-bind="value: selectedShowcaseStartDate" class="date-picker" />
+                                    </div>
+                                    <br />
+                                    <div class="title">
+                                        @DisplayNames.ShowcaseEnd
+                                    </div>
+                                    <div>
+                                        <input type="text" data-bind="value: selectedShowcaseEndDate" class="date-picker" />
+                                    </div>
+                                </div>
+                                <div class="dialog-save-button">
+                                    <input type="button" data-bind="click: $root.changeShowcaseDates, enable: selectedShowcaseStartDate() && !isDisabled()" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                                </div>
+                            </div>
+                        </td>
+                        <td class="date">
+                            <span data-bind="text: showcaseEndDate, click: $root.showShowcaseDatesSelector" class="cursor-pointer"></span>
+                        </td>*@
+                    <td class="publish">
+                        <input type="checkbox" data-bind="checked: publish, click: $root.changePublish" />
+                    </td>
+                    <td class="date">
+                        <span data-bind="text: publishStartDate, click: $root.showPublishDatesSelector" class="cursor-pointer"></span>
+                        <div data-bind="fadeVisible: publishDatesSelectorIsVisible" class="dialog">
+                            <div class="dialog-title">
+                                <span class="dialog-title-text">@StaticContent.Lbl_PublishDates</span>
+                                <img data-bind="click: $root.closePublishDatesSelector" src="@Url.Content("~/Content/images/close.png")" alt="@StaticContent.Btn_Close" />
+                            </div>
+                            <div class="dialog-content">
+                                <div class="title">
+                                    @DisplayNames.PublishStartDate
+                                    <span class="asterisk">*</span>
+                                </div>
+                                <div class="title">
+                                    <input type="text" data-bind="value: selectedPublishStartDate" class="date-picker" />
+                                </div>
+                                <br />
+                                <div class="title">
+                                    @DisplayNames.PublishEndDate
+                                </div>
+                                <div class="title">
+                                    <input type="text" data-bind="value: selectedPublishEndDate" class="date-picker" />
+                                </div>
+                            </div>
+                            <div class="dialog-save-button">
+                                <input type="button" data-bind="click: $root.changePublishDates, enable: selectedPublishStartDate() && !isDisabled()" value="@StaticContent.Btn_Save" class="btn btn-mini btn-primary" />
+                            </div>
+                        </div>
+                    </td>
+                    <td class="date">
+                        <span data-bind="text: publishEndDate, click: $root.showPublishDatesSelector" class="cursor-pointer"></span>
+                    </td>
+                    @if (Model.IsAdmin)
+                    {
+                        <td class="delete-column">
+                            <input type="button" data-bind="click: $root.deleteCommunity" value="@StaticContent.Btn_Delete" class="btn btn-mini" />
+                        </td>
+                    }
+                    <td class="no-borders">
+                        <img src="@Url.Content("~/Content/images/loader.gif")" alt="@StaticContent.Alt_Loader" class="loader" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        @{ Html.RenderPartial("Partial/_Paging"); }
+    </div>

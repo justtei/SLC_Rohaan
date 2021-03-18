@@ -1,0 +1,300 @@
+﻿html {
+}
+
+//#region Colors
+
+@black: #000;
+@white: #fff;
+@blue: #013f7a;
+@dark-gray:#7a7a7c;
+@text-color: #545455;
+@link-color: #006dd2;
+@address-color: @black;
+@brand-color-red: #589694;
+@brand-color-blue: @blue;
+@bg-color: @white;
+@light-gray: #ccc;
+@error-color: #ff4848;
+@error-focus-color: #d00505;
+
+//#endregion
+
+//#region Grid
+
+@grid-columns: 24;
+@grid-gutter-width: 30px;
+
+@screen-lg: 992px;
+@screen-lg-min: @screen-lg;
+
+@screen-md: 768px;
+@screen-md-min: @screen-md;
+@screen-md-max: (@screen-lg - 1);
+
+@screen-sm: 480px;
+@screen-sm-min: @screen-sm;
+@screen-sm-max: (@screen-md - 1);
+
+@screen-xs: 240px;
+@screen-xs-max: (@screen-sm - 1);
+
+@container-md: @screen-md - @grid-gutter-width;
+@container-lg: @screen-lg - @grid-gutter-width;
+@container-max-width: 1170px;
+@container-border-width: 3px;
+
+//#endregion
+
+//#region Indent
+
+@indent: 20px;
+@indent-s: 10px;
+@indent-l: 40px;
+
+@hpadding: @grid-gutter-width / 2;
+@hpadding-s: @grid-gutter-width / 3;
+@hpadding-l: @grid-gutter-width;
+@hpadding-xl: @grid-gutter-width * 1.5;
+
+@vpadding: @grid-gutter-width / 2;
+@vpadding-s: @grid-gutter-width / 3;
+@vpadding-l: @grid-gutter-width;
+@vpadding-xl: @grid-gutter-width * 1.5;
+
+//#endregion
+
+//#region Footer
+
+@footer-color: @white;
+
+@footer-bg-color: @brand-color-blue;
+@footer-border-color: @brand-color-red;
+@footer-border-width: 3px;
+
+@footer-link-color: @white;
+@footer-link-hover-color: darken(@footer-link-color, 5%);
+
+@footer-height: 70px;
+
+//#endregion
+
+//#region Index
+
+@index-logo-width: 257px;
+
+@index-type-list-color: @white;
+@index-type-list-active-color: #f9f8f6;
+
+@search-bar-message-color: #565759;
+@search-bar-message-bg-color: #e6e6e6;
+@search-bar-message-vpadding: 7px;
+@search-bar-autocomplete-padding: 5px 0px;
+@autocomplete-input-color: #b3b3b3;
+
+@index-search-arrow-height: 15px;
+@index-search-arrow-width: @index-search-arrow-height * 2;
+
+@icon-type-size: 130px;
+@icon-type-br-color: @light-gray;
+
+@index-order-bg-color: #f2f2f2;
+
+//#endregion
+
+//#region Fonts
+
+@font-size-base: 14px;
+@font-size-large: ceil((@font-size-base * 1.25));
+@font-size-small: ceil((@font-size-base * 0.85));
+@font-size-incr: @font-size-base + 2px;
+@font-size-decr: @font-size-base - 2px;
+
+@font-size-h1: @font-size-base + 14;
+@font-size-h2: @font-size-base + 10;
+@font-size-h3: @font-size-base + 10;
+@font-size-h4: @font-size-base + 4;
+@font-size-h5: @font-size-base;
+@font-size-h6: @font-size-base - 4;
+
+@line-height-base: 1.428571429; // 20/14;
+@line-height-computed: 20px;
+
+@font-size-icon: @line-height-computed;
+
+@font-family-text: 'open_sans';
+@font-family-ico: 'icomoon';
+
+@view-large-size: 30px;
+
+//#endregion
+
+//#region Forms
+
+@input-vpadding: 7px;
+@input-hpadding: 10px;
+@input-border-color: @light-gray;
+@input-border-active-color: darken(@input-border-color, 40%);
+@input-height-base: @line-height-base * @font-size-base + @input-vpadding*2;
+@input-border-width: 1px;
+@input-color: darken(@text-color, 10%);
+@prepend-bg-color: #e0e0e0;
+
+@disabled-opacity: 0.35;
+
+@select-bg-color: @bg-color;
+@select-hover-bg-color: @dark-gray;
+@select-items-padding: 5px 10px;
+
+//#endregion
+
+//#region Z-index
+@modal-lg:                    900px;
+@modal-md:                    600px;
+@modal-sm:                    300px;
+
+@modal-backdrop-opacity: 0.5;
+@zindex-popover: 1060;
+@zindex-modal: 1070;
+@zindex-notification:      1080;
+
+//#endregion
+
+//#region Modal
+
+//#endregion
+
+//#region Transition
+
+@transition-hover-delay: .15s;
+@transition-func: ease;
+@transition-duration: .7s;
+
+//#endregion
+
+//#region Breadcrumb
+
+@breadcrumb-delimiter: '»';
+@breadcrumb-padding: 5px;
+
+//#endregion
+
+//#region Searchbar
+
+@head-search-type-color: @black;
+@head-search-bar-bg-color: #ededed;
+@head-search-bar-border-color: #ccc;
+@head-search-bar-border-width: 3px;
+@refine-heade-active-color: @black;
+@refine-divider-width: 2px;
+@refine-divider-color: @white;
+
+//#endregion
+
+//#region Featured
+
+@featured-background-color: #ededed;
+@featured-border-color: @brand-color-blue;
+@featured-border-width: 5px;
+@featured-border-bottom-color: #d8d8d8;
+@featured-border-bottom-width: 3px;
+@featured-delimiter-color: @white;
+@featured-delimiter-width: 3px;
+
+//#endregion
+
+//#region Order book
+
+@order-book-bg-color: #ededed;
+@order-book-border-width: 3px;
+@order-book-border-color: #d8d8d8;
+
+//#endregion
+
+//#region List
+
+@list-inline-columns: 5;
+@default-column-gap: 5px;
+
+//#endregion
+
+//#region Result
+
+@res-control-bg-color: #ededed;
+@res-details-bg-color: #f7f7f7;
+
+@res-border-width: 2px;
+@res-border-color: #dadada;
+
+@res-descriptor-color: @black;
+
+//#endregion
+
+//#region Paging
+
+@paging-margin: 15px;
+@paging-item-padding: 6px 12px;
+@paging-color: #7F7F7F;
+@paging-bg-color: @white;
+@paging-hover-bg-color: #EEE;
+@paging-active-color: @white;
+@paging-active-bg-color: @brand-color-blue;
+@paging-ico-first: '\e605';
+@paging-ico-prev: '\e602';
+@paging-ico-next: '\e606';
+@paging-ico-last: '\e609';
+
+//#endregion
+
+//#region Notification
+
+@notification-right-margin: 5%;
+@notification-bottom-margin: 5px;
+@notification-width: 90%;
+@notification-max-width: 600px;
+@notification-area-border-width: 2px;
+@notification-area-success-color: #0070c0;
+@notification-area-error-color: #e62815;
+@notification-area-default-color: @text-color;
+@notification-area-bg-color: @white;
+@notification-area-padding: 10px 50px 10px 15px;
+@notification-area-close-background-color: #CBCBCB;
+@notification-area-close-background-padding: 10px;
+
+//#endregion
+
+//#region Date Picker
+
+@date-picker-bg-color: #ededed;
+@date-picker-border-color: #d8d8d8;
+@date-picker-header-text-color: @black;
+@date-picker-primary-color: @brand-color-red;
+@date-picker-secondary-color: @brand-color-blue;
+
+//#endregion
+
+//#region Popover
+
+@popover-max-width: 276px;
+@popover-bg: @white;
+@popover-fallback-border-color: #ccc;
+@popover-border-color: rgba(0,0,0,.2);
+@popover-arrow-width: 10px;
+@popover-title-bg: darken(@popover-bg, 3%);
+@popover-arrow-outer-width: (@popover-arrow-width + 1);
+@popover-arrow-outer-fallback-color: darken(@popover-fallback-border-color, 20%);
+@popover-arrow-outer-color: fadein(@popover-border-color, 5%);
+@popover-arrow-color: @white;
+@popover-border-width: 1px;
+@popover-close-icon-font-size: 10px;
+
+//#endregion
+
+//#region
+
+@img-out-border-color: #e2e2e5;
+@img-out-border-width: 1px;
+@img-in-border-color: @white;
+@img-in-border-width: 2px;
+@img-price-font-size: @font-size-base+2px;
+
+//#endregion

@@ -1,0 +1,57 @@
+﻿html {
+}
+
+@import '../variables.less';
+
+@font-size-back: 10px;
+
+.ad-160x600 {
+    width: 160px;
+    height: 600px;
+    overflow: hidden;
+}
+
+.ad-300x250 {
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.social {
+    text-align: right;
+    height: @input-height-base + @vpadding-s * 2;
+    line-height: @input-height-base + @vpadding-s * 2;
+
+    > a {
+        &.link-txt {
+            font-size: 16px;
+            position: relative;
+
+            &:before {
+                position: absolute;
+                left: -(@font-size-back + 5px);
+                top: 6px;
+                font-size: @font-size-back;
+            }
+        }
+
+        &.link-icon {
+            text-decoration: none;
+            color: #8a8a8a;
+            font-size: 28px;
+            vertical-align: middle;
+
+            &:hover {
+                color: @brand-color-red;
+            }
+        }
+
+        + a {
+            padding-left: @hpadding;
+        }
+
+        > span {
+            display: none !important;
+        }
+    }
+}

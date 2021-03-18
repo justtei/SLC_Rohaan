@@ -1,0 +1,43 @@
+﻿@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Admin.ViewModels
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model NewOwnerVm
+@{
+    ViewBag.Title = "Edit " + Model.OwnerType.GetEnumLocalizedValue();
+}
+@section scripts
+{
+    <script type="text/javascript">
+        mslc.resolve(['lib/jQuery', 'admin/config', 'admin/editors/ownerEditor'], function($, config, ownerEditor) {
+            $(function() {
+                ownerEditor.init(@Html.Json(Model), config.setting('saveOwnerUrl'));
+            });
+        });
+    </script>
+}
+@section css
+{
+    @Url.Css("themes/base/jquery.ui.core.css")
+    @Url.Css("themes/base/jquery.ui.theme.css")
+    @Url.Css("themes/base/jquery.ui.datepicker.css")
+    @Url.Css("themes/base/jquery.ui.slider.css")
+    @Url.Css("bootstrap/bootstrap-switch.css")
+    @Url.Css("jqueryFileUploader/jquery.fileupload-ui.css")
+    @Url.Css("jqueryCarousel/skin.css")
+    @Url.Css("imageUploader/ImageArea.css")
+    @Url.Css("imageUploader/Modal.css")
+}
+<div class="form-title">
+    @StaticContent.Btn_Edit @Model.OwnerType.GetEnumLocalizedValue()
+</div>
+<hr />
+@{ Html.RenderPartial("Partial/NewOwner", "owner"); }
+<div class="submit-area">
+    <input type="button" class="btn btn-primary" value="@StaticContent.Btn_Save" data-bind="click: submit">
+</div>
+<div class="alert alert-block alert-error" data-bind="visible: !isValid()">
+    <ul  data-bind="foreach: errors">
+        <li data-bind="text: $data"></li>
+    </ul>
+</div>
+@{ Html.RenderPartial("Partial/_ImageSelectPopup", new UploadImageVm()); }

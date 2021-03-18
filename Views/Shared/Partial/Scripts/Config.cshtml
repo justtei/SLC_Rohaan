@@ -1,0 +1,140 @@
+﻿@using MSLivingChoices.Configuration
+@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@{
+    var config = ConfigurationManager.Instance;
+}
+
+<script type="text/javascript">
+    mslc.resolve(['admin/config', 'admin/text'], function(config, text) {
+        config.setting('saveCallTrackingUrl', '@Url.Action("Details", "CallTracking")');
+        config.setting('getCategoryTypesUrl', '@Url.Action("GetCategoryTypes", "Category")');
+        config.setting('saveCategoryTypesUrl', '@Url.Action("SaveCategoryTypes", "Category")');
+        config.setting('getAmenityTypesUrl', '@Url.Action("GetAmenityTypes", "Category")');
+        config.setting('saveAmenityTypesUrl', '@Url.Action("SaveAmenityTypes", "Category")');
+        config.setting('addNewCommunityUrl', '@Url.Action("New", "Community")');
+        config.setting('saveCommunityUrl', '@Url.Action("Edit", "Community")');
+        config.setting('previewImageUrl', '@Url.Action("PreviewImage", "Image")');
+        config.setting('uploadImageUrl', '@Url.Action("Upload", "Image")');
+        config.setting('image800X600BaseUrl', '@Url.GetImage800X600BaseUrl()');
+        config.setting('image160X120BaseUrl', '@Url.GetImage160X120BaseUrl()');
+        config.setting('emptyImageUrl', '@Url.GetEmptyImageUrl()');
+        config.setting('getStatesUrl', '@Url.Action("GetStates", "Location")');
+        config.setting('getCitiesUrl', '@Url.Action("GetCities", "Location")');
+        config.setting('addNewOwnerUrl', '@Url.Action("New", "Owner")');
+        config.setting('saveOwnerUrl', '@Url.Action("Edit", "Owner")');
+        config.setting('addNewServiceProviderUrl', '@Url.Action("New", "ServiceProvider")');
+        config.setting('saveServiceProviderUrl', '@Url.Action("Edit", "ServiceProvider")');
+        config.setting('getSeoCountriesUrl', '@Url.Action("GetCountries", "Seo")');
+        config.setting('getIndexMetadataUrl', '@Url.Action("GetIndexMetadata", "Seo")');
+        config.setting('getCountryMetadataUrl', '@Url.Action("GetCountryMetadata", "Seo")');
+        config.setting('getStateMetadataUrl', '@Url.Action("GetStateMetadata", "Seo")');
+        config.setting('getCityMetadataUrl', '@Url.Action("GetCityMetadata", "Seo")');
+        config.setting('saveSeoMetadataUrl', '@Url.Action("SaveMetaData", "Seo")');
+
+        config.setting('dateJsFormat', '@config.AdminJsDateFormat');
+        config.setting('dateServerFormat', '@config.AdminServerDateFormat');
+        config.setting('momentJsTimeFormat', '@config.MomentJsTimeFormat');
+        config.setting('slideDuration', @config.SlideDuration);
+        config.setting('timeFormat', '@config.TimeFormat');
+        config.setting('timePickerTimeFormat', '@config.TimePickerTimeFormat');
+        config.setting('timeStepMinute', @config.TimeStepMinute);
+
+        config.setting('amenityNameMaxLength', @ConfigurationManager.AmenityNameMaxLength);
+        config.setting('communityImagesMaxLength', @config.CommunityImagesMaxLength);
+        config.setting('communityNameMaxLength', @ConfigurationManager.CommunityNameMaxLength);
+        config.setting('communityServiceNameMaxLength', @ConfigurationManager.CommunityServiceNameMaxLength);
+        config.setting('communityUnitImagesMaxLength', @config.CommunityUnitImagesMaxLength);
+        config.setting('communityUnitsMaxLength', @config.CommunityUnitsMaxLength);
+        config.setting('communityVirtualTourMaxLength', @ConfigurationManager.CommunityVirtualTourMaxLength);
+        config.setting('communityWebsiteUrlMaxLength', @ConfigurationManager.CommunityWebsiteUrlMaxLength);
+        config.setting('contactFirstNameMaxLength', @ConfigurationManager.ContactFirstNameMaxLength);
+        config.setting('contactLastNameMaxLength', @ConfigurationManager.ContactLastNameMaxLength);
+        config.setting('couponDescriptionMaxLength', @ConfigurationManager.CouponDescriptionMaxLength);
+        config.setting('couponNameMaxLength', @ConfigurationManager.CouponNameMaxLength);
+        config.setting('emailMaxLength', @ConfigurationManager.EmailMaxLength);
+        config.setting('floorPlanNameMaxLength', @ConfigurationManager.FloorPlanNameMaxLength);
+        config.setting('logoImagesMaxLength', @config.LogoImagesMaxLength);
+        config.setting('officeHoursNoteMaxLength', @ConfigurationManager.OfficeHoursNoteMaxLength);
+        config.setting('ownerNameMaxLength', @ConfigurationManager.OwnerNameMaxLength);
+        config.setting('ownerWebsiteUrlMaxLength', @ConfigurationManager.OwnerWebsiteUrlMaxLength);
+        config.setting('phoneNumberMaxLength', @ConfigurationManager.PhoneNumberMaxLength);
+        config.setting('postalCodeMaxLength', @ConfigurationManager.PostalCodeMaxLength);
+        config.setting('serviceProviderImagesMaxLength', @config.ServiceProviderImagesMaxLength);
+        config.setting('serviceProviderNameMaxLength', @ConfigurationManager.ServiceProviderNameMaxLength);
+        config.setting('serviceProviderWebsiteUrlMaxLength', @ConfigurationManager.ServiceProviderWebsiteUrlMaxLength);
+        config.setting('specHomeNameMaxLength', @ConfigurationManager.SpecHomeNameMaxLength);
+        config.setting('streetAddressMaxLength', @ConfigurationManager.StreetAddressMaxLength);
+
+        text.message('amenityLabel', '@DisplayNames.Amenity');
+        text.message('bookLabel', '@DisplayNames.Book');
+        text.message('cityLabel', '@DisplayNames.City');
+        text.message('listingNumberLabel', '@DisplayNames.ListingNumber');
+        text.message('communityServiceLabel', '@DisplayNames.CommunityService');
+        text.message('contactFirstNameLabel', '@DisplayNames.ContactFirstName');
+        text.message('contactLastNameLabel', '@DisplayNames.ContactLastName');
+        text.message('countryLabel', '@DisplayNames.Country');
+        text.message('couponDescriptionLabel', '@DisplayNames.CouponDescription');
+        text.message('couponExpirationDateLabel', '@DisplayNames.CouponExpirationDate');
+        text.message('couponLabel', '@DisplayNames.Coupon');
+        text.message('couponPublishDateLabel', '@DisplayNames.CouponPublishDate');
+        text.message('emailLabel', '@DisplayNames.Email');
+        text.message('endDateLabel', '@DisplayNames.EndDate');
+        text.message('endDayLabel', '@DisplayNames.EndDay');
+        text.message('featureEndDateLabel', '@DisplayNames.FeatureEndDate');
+        text.message('featureStartDateLabel', '@DisplayNames.FeatureStartDate');
+        text.message('floorPlansImagesLabel', '@DisplayNames.FloorPlanImages');
+        text.message('floorPlanLabel', '@DisplayNames.FloorPlan');
+        text.message('houseImagesLabel', '@DisplayNames.HouseImages');
+        text.message('houseLabel', '@DisplayNames.House');
+        text.message('listingTypesLabel', '@DisplayNames.SecondaryListingTypes');
+        text.message('maxLabel', '@StaticContent.WtrMrk_Max');
+        text.message('minLabel', '@StaticContent.WtrMrk_Min');
+        text.message('nameLabel', '@DisplayNames.Name');
+        text.message('noteLabel', '@DisplayNames.Note');
+        text.message('packageTypeLabel', '@StaticContent.Lbl_PackageType');
+        text.message('phoneLabel', '@DisplayNames.Phone');
+        text.message('publishEndDateLabel', '@DisplayNames.PublishEndDate');
+        text.message('publishStartDateLabel', '@DisplayNames.PublishStartDate');
+        text.message('serviceCategoriesLabel', '@DisplayNames.ServiceCategories');
+        text.message('countiesServedLabel', '@DisplayNames.CountiesServed');
+        text.message('shcCategoriesLabel', '@HttpUtility.JavaScriptStringEncode(DisplayNames.SHCCategories)');
+        text.message('showcaseEndLabel', '@DisplayNames.ShowcaseEnd');
+        text.message('showcaseStartLabel', '@DisplayNames.ShowcaseStart');
+        text.message('specHomesImagesLabel', '@DisplayNames.SpecHomeImages');
+        text.message('specHomeLabel', '@DisplayNames.SpecHome');
+        text.message('startDateLabel', '@DisplayNames.StartDate');
+        text.message('startDayLabel', '@DisplayNames.StartDay');
+        text.message('stateLabel', '@DisplayNames.State');
+        text.message('streetAddressLabel', '@DisplayNames.StreetAddress');
+        text.message('targetNumberLabel', '@DisplayNames.TargetNumber');
+        text.message('typeLabel', '@DisplayNames.Type');
+        text.message('unitCountLabel', '@DisplayNames.UnitCount');
+        text.message('virtualTourLabel', '@DisplayNames.VirtualTour');
+        text.message('websiteAddressLabel', '@DisplayNames.WebsiteAddress');
+        text.message('zipLabel', '@DisplayNames.Zip');
+        
+        text.message('phoneResume', '@StaticContent.Info_PhoneResume');
+        text.message('unpublishedCallTracking', '@StaticContent.Info_UnpublishedCallTracking');
+
+        text.message('ajaxServerErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.AjaxServerError)');
+        text.message('callTrackingListErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.CallTrackingListValidationError)');
+        text.message('dateRangeErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.DateRange)');
+        text.message('invalidEmailErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.InvalidEmail)');
+        text.message('invalidMinValueErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.InvalidMinValue)');
+        text.message('invalidUrlErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.InvalidUrl)');
+        text.message('invalidYearErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.InvalidYear)');
+        text.message('maxCollectionLengthErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.MaxCollectionLength)');
+        text.message('maxRangeErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.MaxRange)');
+        text.message('maxStringLengthErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.MaxStringLength)');
+        text.message('minRangeErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.MinRange)');
+        text.message('notValidServerModelErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.NotValidServerModel)');
+        text.message('notPositiveIntErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.NotPositiveInt)');
+        text.message('numericValueErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.NumericValueError)');
+        text.message('phoneNumberFormatErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.PhoneNumberFormat)');
+        text.message('reachedMaximumLengthErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.ReachedMaximumLength)');
+        text.message('requiredCheckboxListErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.RequiredCheckboxList)');
+        text.message('requiredErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.Required)');
+        text.message('weekRangeErrorMessage', '@HttpUtility.JavaScriptStringEncode(ErrorMessages.WeekRange)');
+    });
+</script>

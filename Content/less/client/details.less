@@ -1,0 +1,121 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+@details-photo-bg-color: #ededed;
+@details-logo-width: 150px;
+
+.details {
+    .photo {
+        background-color: @details-photo-bg-color;
+        border-bottom: 3px solid #d8d8d8;
+    }
+
+    .office-hours {
+        > li {
+            color: @black;
+
+            &:first-of-type:before {
+                content: 'Office Hours: ';
+                color: @text-color;
+            }
+        }
+    }
+
+    .properties {
+        [class*='icon']:before {
+            font-size: 25px;
+            vertical-align: bottom;
+        }
+    }
+
+    .logo {
+        width: @details-logo-width;
+    }
+
+    .floor-plan {
+
+        .grid-row:not(.header) {
+            margin: 0;
+        }
+
+        .view-large.icon-search:before {
+            display: none;
+        }
+
+        > ul > li {
+            border-top: 1px solid #ededed;
+            .prop-transition(background-color);
+
+            &:hover {
+                background-color: darken(@res-details-bg-color, 5%);
+                cursor: pointer;
+
+                .view-large {
+                    &:before {
+                        display: block;
+                        position: absolute;
+                        color: white;
+                        font-size: @view-large-size;
+                        left: 50%;
+                        top: 50%;
+                        margin-top: -@view-large-size/2;
+                        margin-left: -@view-large-size/2;
+                        z-index: 2;
+                    }
+
+                    &:after {
+                        content: ' ';
+                        position: absolute;
+                        left: @grid-gutter-width/2;
+                        right: @grid-gutter-width/2;
+                        top: 0;
+                        bottom: 0;
+                        background-color: rgba(0,0,0, 0.4);
+                        z-index: 1;
+                    }
+                }
+            }
+        }
+
+        .header {
+            background-color: @white;
+            border-top: @res-border-width solid @res-border-color;
+            border-left: @res-border-width solid @res-details-bg-color;
+            border-right: @res-border-width solid @res-details-bg-color;
+            border-bottom: none;
+
+            > div {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        }
+    }
+
+    .coupon {
+        border: 5px solid #ededed;
+
+        .inner {
+            border: 2px dashed @res-border-color;
+        }
+    }
+
+    padding-bottom: @vpadding;
+}
+
+.properties {
+    [class*='icon']:before {
+        font-size: 25px;
+        vertical-align: bottom;
+    }
+}
+
+#inline-lead-form .lead-confirmation {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.lead-confirmation {
+    display: none;
+}

@@ -1,0 +1,45 @@
+﻿@using System.Web.Script.Serialization
+@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model MSLivingChoices.Mvc.Uipc.Admin.ViewModels.OwnerGridVm<MSLivingChoices.Mvc.Uipc.Admin.ViewModels.OwnerForGridVm>
+@{
+    ViewBag.Title = Model.OwnerType.GetEnumLocalizedValue() + " Grid";
+}
+@section scripts
+{
+    @Url.Script("legacy/jquery/jquery-ui-1.9.2.min.js")
+    @Url.Script("legacy/knockout/knockout-2.2.0.js")
+    @Url.Script("legacy/custom/grids/grid.js")
+    @Url.Script("legacy/custom/grids/ownerGrid.js")
+    <script type="text/javascript">
+        $(function() { initializeOwnerGrid(@Html.Raw(new JavaScriptSerializer().Serialize(Model)), '@Model.OwnerType'); });
+    </script>
+}
+@section css
+{
+    @Url.Css("css/grid.css")
+}
+@{ Html.RenderPartial("Partial/_AjaxServerError"); }
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                @StaticContent.Lbl_Name
+            </th>
+            <th>
+                @StaticContent.Lbl_WebsiteAddress
+            </th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: list">
+        <tr>
+            <td>
+                <a data-bind="text: name, attr: { href: '@Url.Action("Edit")' + '?id=' + id }, click: $root.showOverlay"  title="@(StaticContent.Btn_Edit + Model.OwnerType.GetEnumLocalizedValue())"></a>
+            </td>
+            <td>
+                <a data-bind="text: webSiteUrl, attr: { href: webSiteUrl, target: '_blank' }" title="@string.Format("{0} {1} {2}", StaticContent.Info_GoToThe, Model.OwnerType.GetEnumLocalizedValue(), StaticContent.Info_Website)"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@{ Html.RenderPartial("Partial/_Paging", Model); }

@@ -1,0 +1,52 @@
+﻿@using MSLivingChoices.Localization
+<div data-bind="with: phoneList">
+    <span class="btn btn-small btn-info" data-bind="click: addPhone">
+        @StaticContent.Lbl_AddPhone
+    </span>
+    <div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.PhoneType</label>
+            </div>
+            <div>
+                <select disabled="disabled">
+                    <option data-bind="text: defaultPhoneTypeName"/>
+                </select>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.Phone</label>
+                <span class="asterisk">*</span>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: defaultPhoneNumber, validationElement: defaultPhoneNumber"/>
+                <span class="field-validation-error" data-bind="validationMessage: defaultPhoneNumber"></span>
+            </div>
+        </div>
+    </div>
+    <!-- ko foreach: additionalPhones -->
+    <div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.PhoneType</label>
+            </div>
+            <div>
+                <select data-bind="options: phoneTypes, value: phoneTypeId, optionsText: 'text', optionsValue: 'value'"></select>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.Phone</label>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: number, validationElement: number"/>
+                <span class="field-validation-error" data-bind="validationMessage: number"></span>
+            </div>
+        </div>
+        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.additionalPhones().length > 1, click: $parent.deletePhone">
+            @StaticContent.Btn_Delete
+        </span>
+    </div>
+    <!-- /ko -->
+</div>

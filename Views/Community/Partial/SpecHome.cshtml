@@ -1,0 +1,20 @@
+﻿@using MSLivingChoices.Localization
+<div>
+    <label>@StaticContent.Lbl_Description</label>
+</div>
+<div>
+    <textarea data-bind="textInput: description"></textarea>
+</div>
+<div>
+    <label>@DisplayNames.SaleType</label>
+</div>
+<div>
+    <select data-bind="options: saleTypes, value: saleType, optionsText: 'text', optionsValue: 'value'"></select>
+</div>
+<div>
+    <label>@DisplayNames.Status</label>
+</div>
+<div>
+    <select data-bind="options: statuses, value: status, optionsText: 'text', optionsValue: 'value'"></select>
+</div>
+@{ Html.RenderPartial("Partial/FloorPlan"); }

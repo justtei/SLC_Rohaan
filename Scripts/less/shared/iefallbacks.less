@@ -1,0 +1,104 @@
+﻿html{
+}
+
+@import '../variables.less';
+
+.ie-placeholder {
+    display: none;
+}
+
+.old-ie-fix {
+
+    .ie-placeholder{
+        display: block;
+        font-weight: bold;
+        color:@brand-color-red;
+        cursor:pointer;
+    }
+
+    label input[type*='checkbox'] {
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+    }
+
+    .disabled,
+    [disabled] {
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
+        cursor: not-allowed;
+    }
+
+    header,
+    article,
+    section {
+        display: block;
+    }
+
+    img {
+        border: none;
+    }
+
+    .index .search-bar > .container {
+        background-color: black;
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
+    }
+
+    .img-wrapper .price,
+    .img-wrapper .photo-count {
+        background-color: @black;
+    }
+
+    .modal-backdrop.in.fade {
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
+    }
+
+    .photo-tour img {
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=30)';
+
+        &.active {
+            -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+        }
+    }
+
+    span.checked:before {
+        content:  '\e60f';
+    }
+
+    //#region Inline column list
+
+.calc-grid-column(@index, @class) when (@index > 0) {
+    .list-col-@{class}-@{index} > li {
+        width: percentage(1/@index);
+    }
+}
+
+.loop-inline-list-columns(@index, @class) when (@index > 0) {
+  .calc-grid-column(@index, @class);
+  .loop-inline-list-columns((@index - 1), @class);
+}
+
+.make-inline-list-grid(@class) {
+  .loop-inline-list-columns(@list-inline-columns, @class);
+}
+
+//#endregion
+
+    ul[class*='list-col-any'] {
+        list-style: none;
+        font-size: 0;
+
+        &.one-line {
+            white-space: normal;
+        }
+
+        > li {
+            vertical-align: top;
+            display: inline-block;
+            font-size: @font-size-base;
+
+            + li {
+                padding-left: 3px;
+            }
+        }
+    }
+
+    .make-inline-list-grid(any);
+}

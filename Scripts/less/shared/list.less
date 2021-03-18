@@ -1,0 +1,96 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+//#region Mixins
+
+.form-style(@suffix, @index) {
+     .list-col-@{suffix}-@{index} {
+        .content-columns(@index);
+    }
+}
+
+.loop-list-column(@suffix, @index) when (@index > 1){
+    .form-style(@suffix, @index);
+    .loop-list-column(@suffix, @index - 1);
+}
+
+.make-column(@suffix){
+    .loop-list-column(@suffix, @list-inline-columns);
+}
+
+//#endregion
+
+.make-column(any);
+
+.list-inline {
+    .list-unstyled();
+
+    &.divider {
+        > li + li:before {
+            content: '|';
+            padding-left: 5px;
+        }
+    }
+
+    &.comma {
+
+        &.indent {
+
+            > li + li:before {
+                position: absolute;
+                margin-left: -@hpadding;
+            }
+        }
+
+        > li + li:before {
+            content: ', ';
+            margin-left: -4px;
+        }
+    }
+
+    &.indent {
+        > li + li {
+            padding-left: @hpadding;
+        }
+    }
+
+    > li {
+        display: inline-block;
+    }
+}
+
+.list-unstyled {
+    .list-unstyled();
+}
+
+&ul {
+    .padded {
+        padding-left: @grid-gutter-width/2;
+    }
+}
+
+[class*='list-col-'] {
+    .list-unstyled();
+    //Webkit bug https://bugs.webkit.org/show_bug.cgi?id=55740
+    min-height: initial;
+
+    > li {
+        -webkit-column-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    &.one-line {
+        //Move to mixins and variables
+        white-space: nowrap;
+        -webkit-column-gap: 20px;
+        -moz-column-gap: 20px;
+        column-gap: 20px;
+
+        > li {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

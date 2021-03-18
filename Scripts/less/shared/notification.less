@@ -1,0 +1,38 @@
+﻿html {}
+
+@import '../mixins.less';
+
+.notifications-area {
+    position: fixed;
+    bottom: @notification-bottom-margin;
+    width: @notification-width;
+    max-width: @notification-max-width;
+    right: @notification-right-margin;
+    z-index: @zindex-notification;
+
+    .close {
+        position: absolute;
+        right: @notification-area-border-width;
+        top: @notification-area-border-width;
+        padding: @notification-area-close-background-padding;
+        color: inherit;
+        background-color: @notification-area-bg-color;
+    }
+
+    .alert {
+        border: @notification-area-border-width solid @notification-area-default-color;
+        background-color: @notification-area-bg-color;
+        padding: @notification-area-padding;
+        font-weight: bold;
+
+        &.alert-success {
+            color: @notification-area-success-color;
+            border-color: @notification-area-success-color;
+        }
+
+        &.alert-error {
+            color: @notification-area-error-color;
+            border-color: @notification-area-error-color;
+        }
+    }
+}

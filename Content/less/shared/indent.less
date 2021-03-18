@@ -1,0 +1,225 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+//#region Mixins
+
+.indented(){
+    .ind {
+        margin-top: @indent;
+    }
+
+    .ind-s {
+        margin-top: @indent-s;
+    }
+
+    .ind-l {
+        margin-top: @indent-l;
+    }
+
+    .indent-bottom{
+        margin-bottom: @indent;
+    }
+
+    .indent-bottom-s {
+        margin-bottom: @indent-s;
+    }
+
+    .indent-bottom-l {
+        margin-bottom: @indent-l;
+    }
+}
+
+.indented(@class) {
+    .ind-@{class} {
+        margin-top: @indent;
+    }
+
+    .ind-s-@{class} {
+        margin-top: @indent-s;
+    }
+
+    .ind-l-@{class} {
+        margin-top: @indent-l;
+    }
+
+    .indent-bottom-@{class} {
+        margin-bottom: @indent;
+    }
+
+    .indent-bottom-s-@{class} {
+        margin-bottom: @indent-s;
+    }
+
+    .indent-bottom-l-@{class} {
+        margin-bottom: @indent-l;
+    }
+}
+
+.paddings() {
+    .pad {
+        padding: @hpadding @vpadding;
+    }
+
+    .pad-s {
+        padding: @hpadding-s @vpadding-s;
+    }
+
+    .pad-l {
+        padding: @hpadding-l @vpadding-l;
+    }
+
+    .vpad {
+        padding-top: @vpadding;
+        padding-bottom: @vpadding;
+    }
+
+    .vpad-s {
+        padding-top: @vpadding-s;
+        padding-bottom: @vpadding-s;
+    }
+
+    .vpad-l {
+        padding-top: @vpadding-l;
+        padding-bottom: @vpadding-l;
+    }
+
+    .hpad {
+        padding-left: @hpadding;
+        padding-right: @hpadding;
+    }
+
+    .hpad-s {
+        padding-left: @hpadding-s;
+        padding-right: @hpadding-s;
+    }
+
+    .hpad-l {
+        padding-left: @hpadding-l;
+        padding-right: @hpadding-l;
+    }
+}
+
+.paddings(@class) {
+    .pad-@{class} {
+        padding: @hpadding @vpadding;
+    }
+
+    .pad-s-@{class} {
+        padding: @hpadding-s @vpadding-s;
+    }
+
+    .pad-l-@{class} {
+        padding: @hpadding-l @vpadding-l;
+    }
+
+    .vpad-@{class} {
+        padding-top: @vpadding;
+        padding-bottom: @vpadding;
+    }
+
+    .vpad-s-@{class} {
+        padding-top: @vpadding-s;
+        padding-bottom: @vpadding-s;
+    }
+
+    .vpad-l-@{class} {
+        padding-top: @vpadding-l;
+        padding-bottom: @vpadding-l;
+    }
+
+    .hpad-@{class} {
+        padding-left: @hpadding;
+        padding-right: @hpadding;
+    }
+
+    .hpad-s-@{class} {
+        padding-left: @hpadding-s;
+        padding-right: @hpadding-s;
+    }
+
+    .hpad-l-@{class} {
+        padding-left: @hpadding-l;
+        padding-right: @hpadding-l;
+    }
+}
+
+//#endregion
+
+.indented();
+
+@media (max-width: @screen-xs-max) {
+    .indented(xs);
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .indented(sm);
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .indented(md);
+}
+
+@media (min-width: @screen-lg-min) {
+    .indented(lg);
+}
+
+.paddings();
+
+@media (max-width: @screen-xs-max) {
+    .paddings(xs);
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .paddings(sm);
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .paddings(md);
+}
+
+@media (min-width: @screen-lg-min) {
+    .paddings(lg);
+}
+
+.col-follow {
+    padding-left: 0;
+}
+
+@arrow-hr-color: @light-gray;
+
+.arrow-hr {
+    position: relative;
+    padding: @vpadding 0 0;
+
+    hr {
+        margin: 0;
+        border-width: 0 0 1px 0;
+        border-color: @arrow-hr-color;
+    }
+
+    .arrow {
+        position: absolute;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width:@index-search-arrow-width/2 @index-search-arrow-height 0 @index-search-arrow-width/2;
+        border-color: @arrow-hr-color transparent transparent transparent;
+        margin-left: -@index-search-arrow-width/2;
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            top: -@index-search-arrow-height - 1px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: @index-search-arrow-width/2 @index-search-arrow-height 0 @index-search-arrow-width/2;
+            border-color: @white transparent transparent transparent;
+            margin-left: -@index-search-arrow-width/2;
+            z-index: 2;
+        }
+    }
+}

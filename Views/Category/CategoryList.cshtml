@@ -1,0 +1,25 @@
+﻿@using MSLivingChoices.Localization
+@using MSLivingChoices.Mvc.Uipc.Legacy
+@model List<SelectListItem>
+@section css
+{
+    @Url.Css("themes/base/jquery.ui.core.css")
+    @Url.Css("themes/base/jquery.ui.theme.css")
+    @Url.Css("themes/base/jquery.ui.dialog.css")
+    @Url.Css("css/dialog.css")
+}
+@section scripts
+{
+    <script type="text/javascript">
+        mslc.resolve(['lib/jQuery', 'admin/config', 'admin/editors/categoryEditor'], function($, config, categoryEditor) {
+            $(function() {
+                categoryEditor.init(@HtmlHelpers.Json(Html, Model), '@StaticContent.WtrMrk_SelectCategory', config.setting('getCategoryTypesUrl'),
+                    config.setting('saveCategoryTypesUrl'));
+            });
+        });
+    </script>
+}
+<div class="form-title">
+    @StaticContent.Tlt_Categories
+</div>
+@{ Html.RenderPartial("Partial/CategoryForm"); }

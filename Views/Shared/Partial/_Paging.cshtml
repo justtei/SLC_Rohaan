@@ -1,0 +1,38 @@
+﻿@using MSLivingChoices.Localization
+<div data-bind="with: paging" id="paging">
+    <div data-bind="style: { display: totalCount() == 0 || $root.list().length == 0 ? 'block' : 'none' }" id="noItemsFound">
+        @StaticContent.Txt_NoItemsFound
+    </div>
+    <div data-bind="if: pageCount() > 1" id="pagingTop">
+        <!-- ko if: pageNumber() == 1 -->
+        <img src="@Url.Content("~/Content/images/first_disabled.png")" alt="@StaticContent.Alt_FirstPage" />
+        <img src="@Url.Content("~/Content/images/previous_disabled.png")" alt="@StaticContent.Alt_PreviousPage" />
+        <!-- /ko -->
+        <!-- ko ifnot: pageNumber() == 1 -->
+        <img data-bind="click: $root.goToFirstPage" src="@Url.Content("~/Content/images/first.png")" alt="@StaticContent.Alt_FirstPage" title="@StaticContent.Tlt_First" />
+        <img data-bind="click: $root.goToPreviousPage" src="@Url.Content("~/Content/images/previous.png")" alt="@StaticContent.Alt_PreviousPage" title="@StaticContent.Tlt_Previous" />
+        <!-- /ko -->
+        <div data-bind="foreach: pages" id="pageNumbers">
+            <span data-bind="text: $data, css: { 'current-page': $parent.pageNumber() == $data }, click: $root.goToPage"></span>
+        </div>
+        <!-- ko if: pageNumber() == pageCount() -->
+        <img src="@Url.Content("~/Content/images/next_disabled.png")" alt="@StaticContent.Alt_NextPage" />
+        <img src="@Url.Content("~/Content/images/last_disabled.png")" alt="@StaticContent.Alt_LastPage" />
+        <!-- /ko -->
+        <!-- ko ifnot: pageNumber() == pageCount() -->
+        <img data-bind="click: $root.goToNextPage" src="@Url.Content("~/Content/images/next.png")" alt="@StaticContent.Alt_NextPage" title="@StaticContent.Tlt_Next" />
+        <img data-bind="click: $root.goToLastPage" src="@Url.Content("~/Content/images/last.png")" alt="@StaticContent.Alt_LastPage" title="@StaticContent.Tlt_Last" />
+        <!-- /ko -->
+    </div>
+    <div data-bind="if: $root.list().length > 0" id="pagingBottom">
+        @StaticContent.Lbl_PageNumber
+        <select data-bind="click: $root.changePageNumber, foreach: pageNumbers" class="auto-width">
+            <option data-bind="value: $data, text: $data, selected: $data == $parent.pageNumber()"></option>
+        </select>
+        @StaticContent.Lbl_PageSize
+        <select data-bind="click: $root.changePageSize, foreach: pageSizes" class="auto-width">
+            <option data-bind="value: $data, text: $data, selected: $data == $parent.pageSize()"></option>
+        </select>
+        <span data-bind="text: pageInfo" id="pageInfo"></span>
+    </div>
+</div>

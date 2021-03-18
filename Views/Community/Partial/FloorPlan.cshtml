@@ -1,0 +1,80 @@
+﻿@using MSLivingChoices.Localization
+<div>
+    <div>
+        <label>@StaticContent.Lbl_Bedrooms</label>
+    </div>
+    <select data-bind="options: availableBedroomsFromQuantity, value: bedroomFromId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_Min'"></select>
+    <span class="dash">-</span>
+    <select data-bind="options: availableBedroomsToQuantity, value: bedroomToId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_Max'"></select>
+</div>
+<div>
+    <div>
+        <label>
+            @StaticContent.Lbl_Bathrooms
+        </label>
+    </div>
+    <select data-bind="options: availableBathroomsFromQuantity, value: bathroomFromId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_Min'"></select>
+    <span class="dash">-</span>
+    <select data-bind="options: availableBathroomsToQuantity, value: bathroomToId, optionsText: 'text', optionsValue: 'value',
+        optionsCaption: '@StaticContent.WtrMrk_Max'"></select>
+</div>
+<div>
+    <label>@StaticContent.Lbl_PriceRange</label>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/MeasureBoundary", "priceRange"); }
+</div>
+<div>
+    <label>@StaticContent.Lbl_LivingSpace</label>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/MeasureBoundary", "livingSpace"); }
+</div>
+<div>
+    <label>@StaticContent.Lbl_Deposit</label>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/MeasureBoundary", "deposit"); }
+</div>
+<div>
+    <label>@StaticContent.Lbl_ApplicationFee</label>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/MeasureBoundary", "applicationFee"); }
+</div>
+<div>
+    <label>@StaticContent.Lbl_PetDeposit</label>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/MeasureBoundary", "petDeposit"); }
+</div>
+<div>
+    <label>@DisplayNames.Amenities</label>
+</div>
+<div>
+    <div class="default-amenities" data-bind="foreach: defaultAmenities">
+        <div class="default-amenity">
+            @{ Html.RenderPartial("Partial/CheckBox"); }
+        </div>
+    </div>
+    <div class="amenities">
+        <span class="btn btn-small btn-info" data-bind="click: addAmenity">
+            @StaticContent.WtrMrk_AddAmenity
+        </span>
+        <!-- ko foreach: customAmenities -->
+        <div>
+            <input type="text" placeholder="@StaticContent.WtrMrk_EnterFeatureOrAmenity" data-bind="textInput: name, validationElement: name"/>
+            <span class="btn btn-mini btn-danger" data-bind="visible: $parent.customAmenities().length > 1, click: $parent.deleteAmenity">
+                @StaticContent.Btn_Delete
+            </span>
+            <div class="field-validation-error" data-bind="validationMessage: name"></div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<div>
+    @{ Html.RenderPartial("Partial/ImageList", "images"); }
+</div>

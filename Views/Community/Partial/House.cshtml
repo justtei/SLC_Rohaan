@@ -1,0 +1,22 @@
+﻿@using MSLivingChoices.Localization
+<div>
+    <label>@StaticContent.Lbl_Description</label>
+</div>
+<div>
+    <textarea data-bind="textInput: description"></textarea>
+</div>
+<div>
+    <label>@DisplayNames.SaleType</label>
+</div>
+<div>
+    <select data-bind="options: saleTypes, value: saleType, optionsText: 'text', optionsValue: 'value'"></select>
+</div>
+<div>
+    <label>@DisplayNames.YearBuild</label>
+</div>
+<div>
+    <input type="text" data-bind="textInput: yearBuilt, validationElement: yearBuilt"/>
+    <span class="field-validation-error" data-bind="validationMessage: yearBuilt"></span>
+</div>
+@{ Html.RenderPartial("Partial/Address"); }
+@{ Html.RenderPartial("Partial/FloorPlan"); }

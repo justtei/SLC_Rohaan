@@ -1,0 +1,27 @@
+﻿@model string
+@using MSLivingChoices.Localization
+<!-- ko with: @Model -->
+<label data-bind="text: displayName"></label>
+<div class="js-image-collection">
+    <div class="row-fluid">
+        <button type="button" class="btn btn-small btn-success" data-bind="disable: isAddDisabled, imageUploader: images">
+            <i class="icon-plus"></i>
+            <span data-bind="text: ' @StaticContent.Btn_Add ' + displayName"></span>
+        </button>
+        <br />
+    </div>
+    <span class="field-validation-error" data-bind="visible: isMaxReached(), text: maxReachedMessage"></span>
+    <span class="field-validation-error" data-bind="visible: !images.isValid(), validationMessage: images"></span>
+    <br />
+    <ul class="thumbnails" data-bind="foreach: images">
+        <li class="image">
+            <a data-bind="href: href" class="thumbnail">
+                <img width="160" height="120" alt="image" data-bind="src: src"/>
+            </a>
+            <span class="btn btn-mini btn-danger delete-image" data-bind="click: $parent.deleteImage">
+                @StaticContent.Btn_Delete
+            </span>
+        </li>
+    </ul>
+</div>
+<!-- /ko -->

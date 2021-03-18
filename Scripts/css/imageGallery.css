@@ -1,0 +1,21 @@
+﻿#thumbs ul.thumbs {
+    float: left;
+    width: 285px;
+}
+
+#thumbs ul.thumbs li {
+    float: left;
+    margin: 1px 2px 0px 2px;
+}
+
+/*#thumbs ul.thumbs li.selected img {
+    border: 1px solid #cdd9e5
+}*/
+
+#slideshow {
+    height: 215px;
+}
+
+#slideshow a.advance-link {
+    font-size: 0pt;
+}

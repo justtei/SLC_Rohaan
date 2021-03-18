@@ -1,0 +1,52 @@
+﻿@using MSLivingChoices.Localization
+<div data-bind="with: emailList">
+    <span class="btn btn-small btn-info" data-bind="click: addEmail">
+        @StaticContent.Btn_AddEmail
+    </span>
+    <div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.EmailType</label>
+            </div>
+            <div>
+                <select disabled="disabled">
+                    <option data-bind="text: defaultEmailTypeName" />
+                </select>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.Email</label>
+                <span class="asterisk">*</span>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: defaultEmail, validationElement: defaultEmail"/>
+                <span class="field-validation-error" data-bind="validationMessage: defaultEmail"></span>
+            </div>
+        </div>
+    </div>
+    <!-- ko foreach: additionalEmails -->
+    <div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.EmailType</label>
+            </div>
+            <div>
+                <select data-bind="options: emailTypes, value: emailTypeId, optionsText: 'text', optionsValue: 'value'"></select>
+            </div>
+        </div>
+        <div class="inline-block">
+            <div class="field-label">
+                <label>@DisplayNames.Email</label>
+            </div>
+            <div>
+                <input type="text" data-bind="textInput: email, validationElement: email"/>
+                <span class="field-validation-error" data-bind="validationMessage: email"></span>
+            </div>
+        </div>
+        <span class="btn btn-mini btn-danger" data-bind="visible: $parent.additionalEmails().length > 1, click: $parent.deleteEmail">
+            @StaticContent.Btn_Delete
+        </span>
+    </div>
+    <!-- /ko -->
+</div>

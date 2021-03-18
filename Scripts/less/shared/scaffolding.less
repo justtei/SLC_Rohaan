@@ -1,0 +1,82 @@
+﻿html{
+    min-height: 100%;
+    position: relative;
+}
+
+@import '../mixins.less';
+
+* {
+    .box-sizing(border-box);
+
+    &:before,
+    &:after {
+        .box-sizing(border-box);
+    }
+}
+
+body {
+    margin: 0;
+    font-family: @font-family-text;
+    color: @text-color;
+    font-size: @font-size-base;
+    line-height: @line-height-base;
+    min-width: @screen-lg-min
+}
+
+p, ul {
+    margin: 0;
+}
+
+ul {
+    padding-left: 0;
+}
+
+a,
+button,
+input,
+textarea {
+    &:focus {
+        outline: none;
+    }
+}
+
+textarea {
+    -moz-resize: vertical;
+    -ms-resize: vertical;
+    -o-resize: vertical;
+    resize: vertical;
+}
+
+hr {
+    border: 1px solid #dadada;
+}
+
+.js-disabled-show {
+    display: block;
+}
+
+.js-disabled-hide {
+    display: none;
+}
+
+@font-face {
+    font-family: @font-family-text;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../../Fonts/OpenSans-Regular-webfont.eot');
+    src: url('../../Fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../Fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../../Fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../../Fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: @font-family-text;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../../Fonts/OpenSans-Bold-webfont.eot');
+    src: url('../../Fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../Fonts/OpenSans-Bold-webfont.woff') format('woff'),
+         url('../../Fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
+         url('../../Fonts/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+}

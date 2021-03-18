@@ -1,0 +1,233 @@
+﻿html {
+}
+
+@import '../variables.less';
+
+/* Layout helpers
+----------------------------------*/
+.ui-helper-hidden {
+    display: none;
+}
+
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.ui-helper-reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    line-height: 1.3;
+    text-decoration: none;
+    font-size: 100%;
+    list-style: none;
+}
+
+.ui-helper-clearfix:before,
+.ui-helper-clearfix:after {
+    content: '';
+    display: table;
+    border-collapse: collapse;
+}
+
+.ui-helper-clearfix:after {
+    clear: both;
+}
+
+.ui-helper-clearfix {
+    min-height: 0; /* support: IE7 */
+}
+
+.ui-helper-zfix {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    filter: Alpha(Opacity=0); /* support: IE8 */
+}
+
+.ui-front {
+    z-index: 100;
+}
+
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-disabled {
+    pointer-events: none;
+    cursor: default !important;
+}
+
+
+/* Icons
+----------------------------------*/
+
+@font-face {
+    font-family: @font-family-ico;
+    src: url('../../fonts/icomoon.eot?5szgim');
+    src: url('../../fonts/icomoon.eot?#iefix5szgim') format('embedded-opentype'), url('../../fonts/icomoon.woff?5szgim') format('woff'), url('../../fonts/icomoon.ttf?5szgim') format('truetype'), url('../../fonts/icomoon.svg?5szgim#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ui-icon:before {
+    font-family: @font-family-ico;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ui-icon-circle-triangle-w:before {
+    content: '\e603'; // .icon-arrow-left-circle
+}
+
+.ui-icon-circle-triangle-e:before {
+    content: '\e607'; // .icon-arrow-right-circle
+}
+
+.ui-state-hover {
+    & > .ui-icon-circle-triangle-w:before {
+        content: '\e604'; // .icon-arrow-left-circle-active
+    }
+
+    & > .ui-icon-circle-triangle-e:before {
+        content: '\e608'; // .icon-arrow-right-circle-active
+    }
+}
+
+.ui-state-disabled > .ui-icon {
+    color: @light-gray;
+}
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ui-datepicker {
+    width: 242px;
+    padding: 3px 3px 0;
+    display: none;
+    border: 1px solid @date-picker-border-color;
+    background-color: @date-picker-bg-color;
+
+    .ui-datepicker-header {
+        position: relative;
+        padding: 3px 0;
+        font-weight: bold;
+    }
+
+    .ui-datepicker-prev,
+    .ui-datepicker-next {
+        position: absolute;
+        top: 2px;
+        color: @date-picker-secondary-color;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .ui-datepicker-prev-hover,
+    .ui-datepicker-next-hover {
+        color: @date-picker-primary-color;
+    }
+
+    .ui-datepicker-prev {
+        left: 5px;
+    }
+
+    .ui-datepicker-next {
+        right: 5px;
+    }
+
+        .ui-datepicker-prev .ui-icon,
+        .ui-datepicker-next .ui-icon {
+            font-size: 18px;
+        }
+
+    .ui-datepicker-title {
+        margin: 0 35px;
+        line-height: @line-height-base;
+        text-align: center;
+        color: @date-picker-header-text-color;
+    }
+
+    table {
+        width: 100%;
+        font-size: .9em;
+        margin: 0 0 6px;
+    }
+
+    th {
+        padding: .7em .3em;
+        text-align: center;
+        font-weight: bold;
+        border: 0;
+    }
+
+    td {
+        border: 1px solid transparent;
+
+        span,
+        a {
+            display: block;
+            padding: 3px;
+            text-align: center;
+            text-decoration: none;
+
+            &.ui-state-default {
+                color: @date-picker-secondary-color;
+            }
+
+            &.ui-priority-secondary {
+                color: @dark-gray;
+            }
+        }
+
+        &.ui-state-disabled {
+            span,
+            a {
+                color: @light-gray !important;
+            }
+        }
+
+        &.ui-datepicker-current-day,
+        &:hover {
+            background-color: @date-picker-primary-color;
+            font-weight: bold;
+            border-color: @date-picker-primary-color !important;
+
+            span,
+            a {
+                color: @white !important;
+            }
+        }
+
+        &.ui-datepicker-today {
+            border-color: @date-picker-secondary-color;
+        }
+    }
+}

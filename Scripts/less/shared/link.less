@@ -1,0 +1,29 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+a {
+    color: @link-color;
+    text-decoration: underline;
+
+    &:hover {
+        color: darken(@link-color, 10%);
+    }
+
+    &.name {
+        font-weight: bold;
+        font-size: @font-size-large;
+    }
+
+    &.order-link {
+        text-decoration: none;
+
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: none;
+            color: @white;
+        }
+    }
+}

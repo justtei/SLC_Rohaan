@@ -1,0 +1,125 @@
+﻿html {
+}
+
+@import '../mixins.less';
+
+img {
+    .user-select(none);
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.img-wrapper {
+    display: block;
+    position: relative;
+    background-color: @img-in-border-color;
+    padding: @img-in-border-width;
+    border: @img-out-border-width solid @img-out-border-color;
+    .prop-transition(background-color);
+
+    img {
+        width: 100%;
+    }
+
+    .img-txt() {
+        position: absolute;
+        background-color: rgba(0,0,0,0.6);
+        color: @white;
+    }
+
+    .price {
+        .img-txt();
+        width: 100%;
+        padding: 5px 15px;
+        left: 0;
+        bottom: 0;
+    }
+
+    .photo-count {
+        .img-txt();
+        top: @img-in-border-width;
+        right: @img-in-border-width;
+        padding: 5px 10px;
+    }
+}
+
+
+.photo-tour {
+    padding: 0 30px;
+    overflow: hidden;
+    position: relative;
+
+    .empty {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        top: 50%;
+        margin-top: -@line-height-computed;
+    }
+
+
+    .rectangle {
+        width: 100%;
+        height: 0;
+        padding-bottom: 75%;
+        position: relative;
+    }
+
+    .list {
+        position: absolute;
+        height: 100%;
+        width: 99999px;
+        list-style: none;
+        .transition(left .5s ease);
+    }
+
+    img {
+        height: 100%;
+        width: auto;
+        opacity: 0.3;
+        .transition(opacity .5s ease);
+        cursor: pointer;
+        display: block;
+        float: left;
+
+        &.active {
+            cursor: default;
+            opacity: 1;
+        }
+    }
+
+    @tour-control-padding: 10px;
+    @tour-control-arrow-size: 30px;
+    @tour-control-size: @tour-control-padding * 2 + @tour-control-arrow-size;
+
+    .tour-control {
+        position: absolute;
+        top: 50%;
+        width: @tour-control-size;
+        height: @tour-control-size;
+        font-size: @tour-control-arrow-size;
+        margin-top: -@tour-control-size/2;
+        padding: @tour-control-padding;
+        background-color: rgba(0,0,0,0.3);
+        color: @white;
+        cursor: pointer;
+
+        &:before {
+            vertical-align: top;
+        }
+    }
+
+    .next {
+        right: 0;
+    }
+
+    .prev {
+        left: 0;
+    }
+}
+
+
+.img-bg {
+    background: white;
+}
